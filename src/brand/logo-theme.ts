@@ -1,20 +1,22 @@
+import { palette } from '../tokens/colors.ts'
 import type { BarColorKey, LogoTheme } from './types.ts'
 
+/** Logo theme derived from design-token primitives (matches public/favicon.svg). */
 export const defaultLogoTheme: LogoTheme = {
   colors: {
-    background: '#111827',
-    bar1: '#5b6cff',
-    bar2: '#3f8cff',
-    bar3: '#00b8d9',
-    bar4: '#00c853',
-    bar5: '#fbfb31',
-    trend: '#fbfb31',
-    ringBg: '#000000',
+    background: palette.ink,
+    bar1: palette.indigo,
+    bar2: palette.blue,
+    bar3: palette.cyan,
+    bar4: palette.deepBlue,
+    bar5: palette.deepPurple,
+    trend: palette.lime,
+    ringBg: palette.ring,
   },
   gradient: {
     ring: {
-      from: '#00d26a',
-      to: '#3a86ff',
+      from: palette.ringFrom,
+      to: palette.ringTo,
     },
   },
 }

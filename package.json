@@ -1,12 +1,19 @@
 {
-  "name": "market-data-brand",
+  "name": "@market-data/brand",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
+  "exports": {
+    "./tokens.css": "./src/css/tokens.css",
+    "./tokens": "./src/tokens/index.ts",
+    "./wording": "./src/tokens/wording.ts",
+    "./logo": "./src/brand/components/Logo.tsx"
+  },
   "scripts": {
-    "dev": "vite",
-    "build": "tsc --noEmit && vite build",
+    "dev": "npm run tokens:generate && vite",
+    "build": "npm run tokens:generate && tsc --noEmit && vite build",
     "preview": "vite preview",
+    "tokens:generate": "tsx scripts/generate-tokens-css.ts",
     "logo:export": "tsx scripts/export-logo.tsx"
   },
   "dependencies": {

@@ -1,10 +1,10 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import { LogoLab } from './brand/LogoLab.tsx'
+import { BrandStudio } from './brand/BrandStudio.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <LogoLab />
+    <BrandStudio />
   </StrictMode>,
 )

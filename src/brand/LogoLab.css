@@ -1,9 +1,6 @@
 .logo-lab {
-  min-height: 100vh;
-  padding: 1.5rem;
-  color: #e5e7eb;
-  background: #0b1120;
-  font-family: system-ui, sans-serif;
+  color: var(--color-text, #e5e7eb);
+  font-family: inherit;
 }
 
 .logo-lab-header h1 {

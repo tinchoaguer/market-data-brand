@@ -12,6 +12,6 @@
       "Public package exports for the UI kit and CSS are documented.",
       "A consumer can import the components and CSS without installing Tailwind."
     ],
-    "status": "Pending"
+    "status": "Done"
   }
 ]

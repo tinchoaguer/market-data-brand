@@ -7,26 +7,61 @@
     "./tokens.css": "./src/css/tokens.css",
     "./tokens": "./src/tokens/index.ts",
     "./wording": "./src/tokens/wording.ts",
-    "./logo": "./src/brand/components/Logo.tsx"
+    "./logo": "./src/brand/components/Logo.tsx",
+    "./ui": {
+      "types": "./dist/ui.d.ts",
+      "import": "./dist/ui.js",
+      "default": "./dist/ui.js"
+    },
+    "./ui.css": "./src/css/ui.css"
+  },
+  "files": [
+    "dist",
+    "src/css",
+    "src/tokens",
+    "src/brand/components",
+    "README.md"
+  ],
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0"
   },
   "scripts": {
-    "dev": "npm run tokens:generate && vite",
-    "build": "npm run tokens:generate && tsc --noEmit && vite build",
+    "dev": "npm run ui:generate && vite",
+    "build": "npm run build:lib && tsc --noEmit && vite build",
+    "build:lib": "npm run ui:generate && vite build --config vite.ui.config.ts",
     "preview": "vite preview",
     "tokens:generate": "tsx scripts/generate-tokens-css.ts",
-    "logo:export": "tsx scripts/export-logo.tsx"
+    "ui:generate": "npm run tokens:generate && tsx scripts/generate-ui-css.ts",
+    "logo:export": "tsx scripts/export-logo.tsx",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
+    "@radix-ui/react-select": "^2.3.3",
+    "@radix-ui/react-slot": "^1.3.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
     "react": "^19.2.7",
-    "react-dom": "^19.2.7"
+    "react-dom": "^19.2.7",
+    "tailwind-merge": "^3.6.0"
   },
   "devDependencies": {
+    "@tailwindcss/cli": "^4.3.2",
+    "@tailwindcss/vite": "^4.3.2",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
     "@types/node": "^24.13.2",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.2",
+    "jsdom": "^29.1.1",
+    "tailwindcss": "^4.3.2",
     "tsx": "^4.20.3",
     "typescript": "~6.0.2",
-    "vite": "^8.1.0"
+    "vite": "^8.1.0",
+    "vite-plugin-dts": "^5.0.3",
+    "vitest": "^4.1.10"
   }
 }

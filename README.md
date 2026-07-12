@@ -1,6 +1,6 @@
 # market-data-brand
 
-Design source of truth for the market-data project: design tokens, brand wording, logo toolkit, and Brand Studio.
+Design source of truth for the market-data project: design tokens, brand wording, logo toolkit, UI kit, and Brand Studio.
 
 ## What lives here
 
@@ -10,8 +10,10 @@ Design source of truth for the market-data project: design tokens, brand wording
 | Generated CSS vars | `src/css/tokens.css` | `@market-data/brand/tokens.css` |
 | Wording / copy | `src/tokens/wording.ts` | `@market-data/brand/wording` |
 | Logo components | `src/brand/components/` | `@market-data/brand/logo` |
+| UI kit (React) | `src/ui/` → `dist/ui.js` | `@market-data/brand/ui` |
+| UI kit CSS bundle | `src/css/ui.css` (generated) | `@market-data/brand/ui.css` |
 
-Edit TypeScript tokens, then regenerate CSS. Do not hand-edit `tokens.css`.
+Edit TypeScript tokens, then regenerate CSS. Do not hand-edit `tokens.css` or `ui.css`.
 
 ## Workflow
 
@@ -19,19 +21,25 @@ Edit TypeScript tokens, then regenerate CSS. Do not hand-edit `tokens.css`.
 2. **Logo** — tune geometry/theme, copy JSON or edit `logo-config.ts` / `logo-theme.ts`
 3. **Tokens** — edit `src/tokens/*`, run `npm run tokens:generate`
 4. **Wording** — edit `src/tokens/wording.ts`
-5. `npm run logo:export` — writes `public/favicon.svg`
-6. In `market-data-fe`, depend on this package via `file:../market-data-brand`
+5. **UI kit** — edit `src/ui/*`, preview under the **UI kit** tab; run `npm run build:lib` for package artifacts
+6. `npm run logo:export` — writes `public/favicon.svg`
+7. In `market-data-fe`, depend on this package via `file:../market-data-brand`
 
 ## Scripts
 
 | Command | Description |
 |---|---|
-| `npm run dev` | Generate tokens + Brand Studio |
+| `npm run dev` | Generate UI CSS + Brand Studio |
 | `npm run tokens:generate` | TS tokens → `src/css/tokens.css` |
+| `npm run ui:generate` | Tokens + theme bridge + component styles → `src/css/ui.css` |
+| `npm run build:lib` | Emit `dist/ui.js`, types, and `ui.css` |
 | `npm run logo:export` | Export SVG favicon from default config |
-| `npm run build` | Production build |
+| `npm run build` | Library artifacts + Studio production build |
+| `npm test` | Unit / contract tests |
 
 ## Frontend usage
+
+### Tokens / wording / logo
 
 ```ts
 import '@market-data/brand/tokens.css'
@@ -46,6 +54,39 @@ body {
   font-family: var(--font-sans);
 }
 ```
+
+### UI kit (no Tailwind required)
+
+Run `npm run build:lib` in this package so `dist/` and `src/css/ui.css` exist, then in the consumer app:
+
+```ts
+import '@market-data/brand/ui.css'
+import {
+  Alert,
+  Badge,
+  Button,
+  Card,
+  Select,
+  Skeleton,
+  Table,
+} from '@market-data/brand/ui'
+```
+
+- Import **`ui.css` once** (e.g. root layout). It includes brand token variables, the theme bridge, and styles for the primitives.
+- Import components from `@market-data/brand/ui`.
+- Do **not** install or configure Tailwind in the product app for these components. Tailwind, Radix wiring, and internal helpers stay private to this package.
+- React is a peer dependency — share the host app’s React runtime.
+
+Public export map:
+
+| Export | Purpose |
+|---|---|
+| `@market-data/brand/ui` | Named React primitives (`Button`, `Select`, `Card`, `Table`, `Badge`, `Skeleton`, `Alert`, …) |
+| `@market-data/brand/ui.css` | Generated stylesheet (tokens + theme + component styles) |
+| `@market-data/brand/tokens` | TypeScript design tokens |
+| `@market-data/brand/tokens.css` | Token CSS variables only |
+| `@market-data/brand/wording` | Shared copy |
+| `@market-data/brand/logo` | Logo component |
 
 ## Harness
 

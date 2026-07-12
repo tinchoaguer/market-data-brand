@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { LogoLab } from './LogoLab.tsx'
 import { TokensLab } from './TokensLab.tsx'
+import { UiLab } from './UiLab.tsx'
 import { WordingLab } from './WordingLab.tsx'
 import { wording } from '../tokens/wording.ts'
 import './BrandStudio.css'
@@ -9,6 +10,7 @@ const TABS = [
   { id: 'logo', label: 'Logo' },
   { id: 'tokens', label: 'Tokens' },
   { id: 'wording', label: 'Wording' },
+  { id: 'ui', label: 'UI kit' },
 ] as const
 
 type TabId = (typeof TABS)[number]['id']
@@ -47,6 +49,7 @@ export function BrandStudio() {
         {tab === 'logo' ? <LogoLab /> : null}
         {tab === 'tokens' ? <TokensLab /> : null}
         {tab === 'wording' ? <WordingLab /> : null}
+        {tab === 'ui' ? <UiLab /> : null}
       </main>
     </div>
   )

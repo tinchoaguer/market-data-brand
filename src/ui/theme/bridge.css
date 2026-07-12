@@ -1,0 +1,43 @@
+/* Theme bridge: brand design tokens → component theme variables.
+   Brand tokens (--color-*, --radius-*, etc.) come from tokens.css. */
+
+:root {
+  --background: var(--color-bg);
+  --foreground: var(--color-text);
+
+  --card: var(--color-surface);
+  --card-foreground: var(--color-text);
+
+  --popover: var(--color-surface);
+  --popover-foreground: var(--color-text);
+
+  --primary: var(--color-accent);
+  --primary-foreground: var(--color-text-inverse);
+
+  --secondary: var(--color-surface-muted);
+  --secondary-foreground: var(--color-text);
+
+  --muted: var(--color-surface-muted);
+  --muted-foreground: var(--color-text-muted);
+
+  --accent: var(--color-accent-strong);
+  --accent-foreground: var(--color-text);
+
+  --destructive: var(--color-danger);
+  --destructive-foreground: var(--color-text-inverse);
+
+  --success: var(--color-positive);
+  --success-foreground: var(--color-text-inverse);
+
+  --warning: var(--color-warning);
+  --warning-foreground: var(--color-text-inverse);
+
+  --info: var(--color-info);
+  --info-foreground: var(--color-text-inverse);
+
+  --border: var(--color-border);
+  --input: var(--color-border);
+  --ring: var(--color-focus);
+
+  --radius: var(--radius-md);
+}

@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "slug": "brand-ui-kit",
+    "title": "Brand UI Kit Library",
+    "description": "Turn brand into a publishable UI library: Radix + Tailwind + shadcn used only inside brand; ship React primitives and a generated CSS bundle; FE must not depend on Tailwind.",
+    "acceptance": [
+      "A library build emits React UI components and a generated CSS bundle.",
+      "Initial primitives are available: Button, Select, Card, Table, Badge, Skeleton, and Alert.",
+      "Component theme is bridged from existing brand design tokens.",
+      "Brand Studio (or a dedicated lab) can preview the primitives.",
+      "Public package exports for the UI kit and CSS are documented.",
+      "A consumer can import the components and CSS without installing Tailwind."
+    ],
+    "status": "Pending"
+  }
+]

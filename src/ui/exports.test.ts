@@ -21,9 +21,10 @@ describe('package exports and consumer contract', () => {
     expect(pkg.exports['./tokens']).toBe('./src/tokens/index.ts')
     expect(pkg.exports['./tokens.css']).toBe('./src/css/tokens.css')
     expect(pkg.exports['./wording']).toBe('./src/tokens/wording.ts')
+    expect(pkg.exports['./locales/en']).toBe('./src/locales/en.json')
     expect(pkg.exports['./logo']).toBe('./src/brand/components/Logo.tsx')
 
-    for (const key of ['./tokens', './tokens.css', './wording', './logo'] as const) {
+    for (const key of ['./tokens', './tokens.css', './wording', './locales/en', './logo'] as const) {
       const target = resolveExportTarget(pkg.exports[key])
       expect(target, key).toBeTruthy()
       expect(existsSync(join(root, target!))).toBe(true)

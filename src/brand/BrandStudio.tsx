@@ -22,7 +22,7 @@ export function BrandStudio() {
     <div className="brand-studio">
       <nav className="brand-studio-nav" aria-label="Brand sections">
         <div className="brand-studio-brand">
-          <strong>{wording.productName}</strong>
+          <strong>{wording.product.name}</strong>
           <span>Brand</span>
         </div>
         <div className="brand-studio-tabs" role="tablist">

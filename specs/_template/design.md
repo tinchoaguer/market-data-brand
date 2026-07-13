@@ -28,6 +28,18 @@
 
 <!-- Testing approach, required test types, coverage expectations -->
 
+## Copy / Wording
+
+Shared design-system copy only. Follow `knowledge/writing/`.
+
+| Key | Action | Notes |
+|-----|--------|-------|
+| `product.*` / `common.*` / `cta.*` / `labels.*` | reuse / add / change | Update `src/locales/en.json` and `knowledge/writing/ui-copy.md` together |
+
+Terminology constraints: see `knowledge/writing/terminology.md`.
+
+Do not document consumer-app feature catalogs here.
+
 ## Requirement Traceability
 
 | Requirement | Design decision |

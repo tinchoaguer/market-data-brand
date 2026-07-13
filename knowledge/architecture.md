@@ -2,17 +2,20 @@
 
 ## System overview
 
-`market-data-brand` is the **design system** package for the market-data project. It is the source of truth for visual identity, copy, and shared UI primitives consumed by `market-data-fe` as `@market-data/brand`.
+`market-data-brand` is the **design system** package for the market-data project. It is the source of truth for visual identity, shared copy, and shared UI primitives consumed as `@market-data/brand`.
 
 ```
 market-data-brand/
+├── knowledge/
+│   └── writing/             # agent-facing copy guidelines
 ├── src/
-│   ├── tokens/              # TS design tokens (source of truth)
+│   ├── locales/             # locale catalogs (default: en.json)
+│   ├── tokens/              # TS design tokens + wording loader
 │   ├── css/tokens.css       # generated CSS variables (do not hand-edit)
 │   ├── brand/               # Brand Studio, logo toolkit
 │   │   └── components/      # Logo and related SVG pieces
-│   └── ui/                  # (planned) shared UI primitives
-├── scripts/                 # tokens:generate, logo:export
+│   └── ui/                  # shared UI primitives
+├── scripts/                 # tokens:generate, logo:export, ui:generate
 └── package.json             # public exports for consumers
 ```
 
@@ -21,12 +24,13 @@ market-data-brand/
 | Concern | Responsibility |
 |---------|----------------|
 | **Design tokens** | Colors, space, type, radius, motion as TS → CSS vars |
-| **Wording** | Product name, taglines, shared copy |
+| **Wording** | Locale catalogs + typed wording export for shared copy |
+| **Writing guidelines** | Agent-facing tone, terminology, and DS inventory under `knowledge/writing/` |
 | **Logo** | Configurable logo components and favicon export |
-| **Brand Studio** | Local Vite app to preview tokens, logo, wording |
-| **UI kit** (planned) | React primitives + generated stylesheet for product apps |
+| **Brand Studio** | Local Vite app to preview tokens, logo, wording, UI kit |
+| **UI kit** | React primitives + generated stylesheet for product apps |
 
-Consumers depend on this package via `file:../market-data-brand` (or a published version). Product screens and API integration live in `market-data-fe`, not here.
+Consumers depend on this package via a local path or a published version. Product screens and API integration live in consuming applications, not here.
 
 ## Current public surface
 
@@ -34,17 +38,18 @@ Consumers depend on this package via `file:../market-data-brand` (or a published
 |--------|------|---------|
 | `@market-data/brand/tokens.css` | `src/css/tokens.css` | CSS custom properties |
 | `@market-data/brand/tokens` | `src/tokens/index.ts` | TS token objects |
-| `@market-data/brand/wording` | `src/tokens/wording.ts` | Copy strings |
+| `@market-data/brand/wording` | `src/tokens/wording.ts` | Typed copy from default locale |
+| `@market-data/brand/locales/en` | `src/locales/en.json` | Default locale catalog |
 | `@market-data/brand/logo` | `src/brand/components/Logo.tsx` | Logo component |
+| `@market-data/brand/ui` | `dist/ui.js` | Shared React primitives |
+| `@market-data/brand/ui.css` | `src/css/ui.css` | Generated UI stylesheet |
 
-## Intended public surface (UI kit)
+## Wording ownership
 
-After the brand UI kit feature:
-
-- Existing token/wording/logo exports remain
-- UI components exported under `@market-data/brand/ui/*` (or equivalent)
-- A **generated** CSS bundle that includes token vars and styles required by those components
-- Consumers import components + the CSS bundle; they do **not** install Tailwind
+- **Runtime strings:** `src/locales/<locale>.json` (default `en`)
+- **Consumer API:** `@market-data/brand/wording` loads the default locale
+- **Guidelines:** `knowledge/writing/` (must be read at Specification and Implementation)
+- Shared DS copy only; screen-specific copy stays in the consuming app
 
 ## Private to brand
 
@@ -66,19 +71,20 @@ When implementing features in this repo, modify only:
 - `public/` (e.g. favicon)
 - `knowledge/`, `work/`, `specs/` as required by harness stages
 
-Do **not** implement `market-data-fe` product pages or backend APIs as part of brand features.
+Do **not** implement product application pages or backend APIs as part of brand features.
 
 ## Cross-repo features
 
 The harness does not coordinate multi-repo features. Split work:
 
-- **Brand features** — tokens, components, generated CSS, Studio previews
-- **FE features** — screens that consume brand exports and call the backend
+- **Brand features** — tokens, shared copy, components, generated CSS, Studio previews
+- **Consumer app features** — screens that consume brand exports and call backends
 
-Link related slugs in feature descriptions when a FE feature depends on a brand capability.
+Link related slugs in feature descriptions when a consumer feature depends on a brand capability.
 
 ## Technology
 
 - React 19 + TypeScript + Vite
 - Node/npm package `@market-data/brand`
 - Token pipeline: TypeScript → `scripts/generate-tokens-css.ts` → `src/css/tokens.css`
+- Wording pipeline: `src/locales/en.json` → `src/tokens/wording.ts` → `@market-data/brand/wording`

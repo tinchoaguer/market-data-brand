@@ -4,6 +4,21 @@
 
 - Code, specs, and harness artifacts: **English**
 
+## UI copy
+
+Spec Writer and Implementer **must** read `knowledge/writing/` before writing specs or implementing user-facing text:
+
+- [`writing/writing-guidelines.md`](./writing/writing-guidelines.md) — tone, capitalization, punctuation
+- [`writing/terminology.md`](./writing/terminology.md) — canonical product terms
+- [`writing/ui-copy.md`](./writing/ui-copy.md) — shared DS inventory and ownership rules
+
+Rules:
+
+- Shared design-system strings live in `src/locales/en.json` and are exported via `@market-data/brand/wording`
+- Do not hardcode user-facing English in components
+- Keep `knowledge/writing/ui-copy.md` inventory in sync with `src/locales/en.json`
+- Feature-specific copy belongs in the consuming product app, not in this package
+
 ## Tokens
 
 - Edit TypeScript under `src/tokens/*.ts` as the source of truth
@@ -19,7 +34,7 @@
 ## Package exports
 
 - Expose consumer APIs via `package.json` `exports`
-- Prefer subpath exports (`./tokens.css`, `./wording`, `./logo`, future `./ui/...`)
+- Prefer subpath exports (`./tokens.css`, `./wording`, `./logo`, `./ui`, `./locales/en`)
 - Keep React as a peer-compatible dependency for library consumers when shipping UI components
 
 ## Naming
@@ -39,6 +54,7 @@ Follow `../harness/governance/spec_guidelines.md`:
 - EARS notation in `requirements.md`
 - REQ-NNN identifiers
 - Traceability across requirements, design, tasks, code, and tests
+- Include a **Copy / Wording** section in `design.md` when the feature adds or changes user-facing text
 
 ## Git
 

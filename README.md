@@ -4,11 +4,13 @@ Design source of truth for the market-data project: design tokens, brand wording
 
 ## What lives here
 
-| Concern | Path | Consumed by FE as |
+| Concern | Path | Consumed as |
 |---|---|---|
 | Design tokens (TS) | `src/tokens/*.ts` | `@market-data/brand/tokens` |
 | Generated CSS vars | `src/css/tokens.css` | `@market-data/brand/tokens.css` |
+| Locale catalog (en) | `src/locales/en.json` | `@market-data/brand/locales/en` |
 | Wording / copy | `src/tokens/wording.ts` | `@market-data/brand/wording` |
+| Writing guidelines | `knowledge/writing/` | Agents (Spec / Implement) |
 | Logo components | `src/brand/components/` | `@market-data/brand/logo` |
 | UI kit (React) | `src/ui/` → `dist/ui.js` | `@market-data/brand/ui` |
 | UI kit CSS bundle | `src/css/ui.css` (generated) | `@market-data/brand/ui.css` |
@@ -20,10 +22,18 @@ Edit TypeScript tokens, then regenerate CSS. Do not hand-edit `tokens.css` or `u
 1. `npm install && npm run dev` — Brand Studio at `http://localhost:5173`
 2. **Logo** — tune geometry/theme, copy JSON or edit `logo-config.ts` / `logo-theme.ts`
 3. **Tokens** — edit `src/tokens/*`, run `npm run tokens:generate`
-4. **Wording** — edit `src/tokens/wording.ts`
+4. **Wording** — edit `src/locales/en.json` and keep `knowledge/writing/ui-copy.md` in sync
 5. **UI kit** — edit `src/ui/*`, preview under the **UI kit** tab; run `npm run build:lib` for package artifacts
 6. `npm run logo:export` — writes `public/favicon.svg`
-7. In `market-data-fe`, depend on this package via `file:../market-data-brand`
+7. Depend on this package from a consumer app via local path or published version
+
+## Writing guidelines
+
+Agent-facing copy rules live under [`knowledge/writing/`](./knowledge/writing/):
+
+- `writing-guidelines.md` — tone, capitalization, punctuation
+- `terminology.md` — canonical product terms
+- `ui-copy.md` — shared DS inventory and ownership
 
 ## Scripts
 
@@ -37,7 +47,7 @@ Edit TypeScript tokens, then regenerate CSS. Do not hand-edit `tokens.css` or `u
 | `npm run build` | Library artifacts + Studio production build |
 | `npm test` | Unit / contract tests |
 
-## Frontend usage
+## Consumer usage
 
 ### Tokens / wording / logo
 
@@ -45,6 +55,12 @@ Edit TypeScript tokens, then regenerate CSS. Do not hand-edit `tokens.css` or `u
 import '@market-data/brand/tokens.css'
 import { wording } from '@market-data/brand/wording'
 import { color } from '@market-data/brand/tokens'
+```
+
+```ts
+wording.product.name
+wording.common.loading
+wording.labels.orderBook
 ```
 
 ```css
@@ -85,7 +101,8 @@ Public export map:
 | `@market-data/brand/ui.css` | Generated stylesheet (tokens + theme + component styles) |
 | `@market-data/brand/tokens` | TypeScript design tokens |
 | `@market-data/brand/tokens.css` | Token CSS variables only |
-| `@market-data/brand/wording` | Shared copy |
+| `@market-data/brand/wording` | Shared copy (default locale) |
+| `@market-data/brand/locales/en` | Default locale JSON catalog |
 | `@market-data/brand/logo` | Logo component |
 
 ## Harness
@@ -94,4 +111,4 @@ This repo adopts the AI Harness for Specification-Driven Development. See [HARNE
 
 1. Open `market-data-brand/` as the Cursor workspace (PROJECT_ROOT)
 2. Ensure agents from `../harness/agents/` are installed to `~/.cursor/agents/`
-3. Start the Orchestrator and run: `Start Feature brand-ui-kit`
+3. Start the Orchestrator and run: `Start Feature <slug>`

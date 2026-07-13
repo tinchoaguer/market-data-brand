@@ -1,0 +1,33 @@
+{
+  "product": {
+    "name": "Market Data",
+    "nameShort": "MD",
+    "tagline": "See the market through a clearer lens.",
+    "description": "Inspect live market structure, deterministic analysis, and classification signals in one place."
+  },
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "loading": "Loading…",
+    "error": "Something went wrong",
+    "retry": "Try again"
+  },
+  "cta": {
+    "viewMarket": "View market data",
+    "viewAnalysis": "View analysis",
+    "viewClassification": "View classification"
+  },
+  "labels": {
+    "symbol": "Symbol",
+    "price": "Price",
+    "orderBook": "Order book",
+    "bids": "Bids",
+    "asks": "Asks",
+    "candles": "Candles",
+    "regime": "Regime",
+    "risk": "Risk",
+    "economic": "Economic",
+    "exposure": "Exposure",
+    "recommendation": "Recommendation"
+  }
+}

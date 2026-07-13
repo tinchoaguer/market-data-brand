@@ -74,7 +74,7 @@ export function TokensLab() {
                 color: color.text,
               }}
             >
-              {wording.productName} — {sample.name}
+              {wording.product.name} — {sample.name}
             </p>
           ))}
           <p

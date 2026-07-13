@@ -3,6 +3,13 @@ import {
   Alert,
   AlertDescription,
   AlertTitle,
+  AppBrand,
+  AppBrandName,
+  AppHeader,
+  AppHeaderBar,
+  AppMain,
+  AppNav,
+  AppShell,
   Badge,
   Button,
   Card,
@@ -11,18 +18,24 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
+  Page,
+  PageEyebrow,
+  PageHeader,
+  PageTitle,
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
   Skeleton,
+  Stack,
   Table,
   TableBody,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
+  Text,
 } from '../ui/index'
 import './UiLab.css'
 
@@ -158,6 +171,45 @@ export function UiLab() {
             <AlertTitle>Success</AlertTitle>
             <AlertDescription>Watchlist saved.</AlertDescription>
           </Alert>
+        </div>
+      </section>
+
+      <section className="ui-lab-section" aria-labelledby="ui-lab-layout">
+        <h2 id="ui-lab-layout">Layout</h2>
+        <p className="ui-lab-layout-note">
+          App chrome and page structure for product apps. Prefer these over utility classNames in
+          consumers.
+        </p>
+        <div className="ui-lab-layout-frame">
+          <AppShell>
+            <AppHeader>
+              <AppHeaderBar>
+                <AppBrand>
+                  <AppBrandName>Market Data</AppBrandName>
+                </AppBrand>
+                <AppNav aria-label="Demo">
+                  <Button size="sm" variant="primary">
+                    Market Data
+                  </Button>
+                  <Button size="sm" variant="ghost">
+                    Analysis
+                  </Button>
+                </AppNav>
+              </AppHeaderBar>
+            </AppHeader>
+            <AppMain>
+              <Page>
+                <PageHeader>
+                  <PageEyebrow>MD</PageEyebrow>
+                  <PageTitle>Market data</PageTitle>
+                </PageHeader>
+                <Stack gap="md">
+                  <Text tone="muted">Page content uses Page + Stack + Text.</Text>
+                  <Skeleton size="card" />
+                </Stack>
+              </Page>
+            </AppMain>
+          </AppShell>
         </div>
       </section>
     </div>

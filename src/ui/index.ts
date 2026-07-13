@@ -26,9 +26,15 @@ export {
   TableRow,
   TableCell,
   TableCaption,
+  tableCellVariants,
+  type TableCellProps,
 } from './components/table'
 export { Badge, badgeVariants, type BadgeProps } from './components/badge'
-export { Skeleton, type SkeletonProps } from './components/skeleton'
+export {
+  Skeleton,
+  skeletonVariants,
+  type SkeletonProps,
+} from './components/skeleton'
 export {
   Alert,
   AlertTitle,
@@ -36,3 +42,40 @@ export {
   alertVariants,
   type AlertProps,
 } from './components/alert'
+export {
+  AppShell,
+  AppHeader,
+  AppHeaderBar,
+  AppBrand,
+  AppBrandMark,
+  AppBrandName,
+  AppNav,
+  AppMain,
+} from './components/app-shell'
+export {
+  Page,
+  PageHeader,
+  PageEyebrow,
+  PageTitle,
+  pageVariants,
+  type PageProps,
+} from './components/page'
+export {
+  Stack,
+  Inline,
+  Cluster,
+  ClusterItem,
+  stackVariants,
+  inlineVariants,
+  type StackProps,
+  type InlineProps,
+} from './components/stack'
+export {
+  Text,
+  Label,
+  SectionHeading,
+  textVariants,
+  sectionHeadingVariants,
+  type TextProps,
+  type SectionHeadingProps,
+} from './components/text'

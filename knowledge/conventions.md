@@ -30,6 +30,8 @@ Rules:
 - Visual design decisions live in this package
 - Consumers use public components, CSS variables, and documented exports
 - Do not require product apps to install Tailwind or copy shadcn internals
+- Product apps must not author Tailwind / utility `className` strings; layout chrome and page structure use kit primitives (`AppShell`, `Page`, `Stack`, `Text`, …)
+- Tailwind is private build tooling for this package only; `ui.css` ships the compiled result
 
 ## Package exports
 

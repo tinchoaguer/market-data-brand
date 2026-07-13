@@ -28,7 +28,7 @@ market-data-brand/
 | **Writing guidelines** | Agent-facing tone, terminology, and DS inventory under `knowledge/writing/` |
 | **Logo** | Configurable logo components and favicon export |
 | **Brand Studio** | Local Vite app to preview tokens, logo, wording, UI kit |
-| **UI kit** | React primitives + generated stylesheet for product apps |
+| **UI kit** | React primitives (controls + layout) + generated stylesheet for product apps |
 
 Consumers depend on this package via a local path or a published version. Product screens and API integration live in consuming applications, not here.
 

@@ -1,5 +1,19 @@
 import * as React from 'react'
+import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '../lib/utils'
+
+const tableCellVariants = cva('p-3 align-middle [&:has([role=checkbox])]:pr-0', {
+  variants: {
+    variant: {
+      default: '',
+      mono: 'font-[family-name:var(--font-mono)] tabular-nums',
+      'mono-xs': 'font-[family-name:var(--font-mono)] text-xs',
+    },
+  },
+  defaultVariants: {
+    variant: 'default',
+  },
+})
 
 export const Table = React.forwardRef<HTMLTableElement, React.HTMLAttributes<HTMLTableElement>>(
   ({ className, ...props }, ref) => (
@@ -74,17 +88,22 @@ export const TableHead = React.forwardRef<
 ))
 TableHead.displayName = 'TableHead'
 
-export const TableCell = React.forwardRef<
-  HTMLTableCellElement,
-  React.TdHTMLAttributes<HTMLTableCellElement>
->(({ className, ...props }, ref) => (
-  <td
-    ref={ref}
-    className={cn('p-3 align-middle [&:has([role=checkbox])]:pr-0', className)}
-    {...props}
-  />
-))
+export interface TableCellProps
+  extends React.TdHTMLAttributes<HTMLTableCellElement>,
+    VariantProps<typeof tableCellVariants> {}
+
+export const TableCell = React.forwardRef<HTMLTableCellElement, TableCellProps>(
+  ({ className, variant, ...props }, ref) => (
+    <td
+      ref={ref}
+      className={cn(tableCellVariants({ variant }), className)}
+      {...props}
+    />
+  ),
+)
 TableCell.displayName = 'TableCell'
+
+export { tableCellVariants }
 
 export const TableCaption = React.forwardRef<
   HTMLTableCaptionElement,

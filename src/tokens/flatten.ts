@@ -7,7 +7,7 @@ function toKebab(segment: string): string {
 
 /**
  * Flatten nested token objects into CSS custom-property entries.
- * `{ color: { accentStrong: '#5b6cff' } }` → `{ '--color-accent-strong': '#5b6cff' }`
+ * `{ color: { accentStrong: '#D5CEA3' } }` → `{ '--color-accent-strong': '#D5CEA3' }`
  */
 export function flattenTokens(
   tree: Record<string, JsonValue>,

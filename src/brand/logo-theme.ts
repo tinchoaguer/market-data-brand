@@ -5,18 +5,18 @@ import type { BarColorKey, LogoTheme } from './types.ts'
 export const defaultLogoTheme: LogoTheme = {
   colors: {
     background: palette.ink,
-    bar1: palette.indigo,
-    bar2: palette.blue,
-    bar3: palette.cyan,
-    bar4: palette.deepBlue,
-    bar5: palette.deepPurple,
-    trend: palette.lime,
-    ringBg: palette.ring,
+    bar1: palette.clay,
+    bar2: palette.wheat,
+    bar3: palette.sky,
+    bar4: palette.blue,
+    bar5: palette.gold,
+    trend: palette.gold,
+    ringBg: palette.wheat,
   },
   gradient: {
     ring: {
-      from: palette.ringFrom,
-      to: palette.ringTo,
+      from: palette.earth,
+      to: palette.gold,
     },
   },
 }

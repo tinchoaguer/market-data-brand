@@ -51,11 +51,12 @@ Rules:
 
 ## Specifications
 
-Follow `../harness/governance/spec_guidelines.md`:
+Follow harness `governance/spec_guidelines.md` (see `HARNESS.md`):
 
 - EARS notation in `requirements.md`
 - REQ-NNN identifiers
 - Traceability across requirements, design, tasks, code, and tests
+- Specs stay inside this PROJECT_ROOT
 - Include a **Copy / Wording** section in `design.md` when the feature adds or changes user-facing text
 
 ## Git

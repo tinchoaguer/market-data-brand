@@ -103,7 +103,7 @@ Props should be TypeScript-typed; accessibility defaults come from Radix where u
 
 ### External systems
 
-- None. Consumers are local packages (`market-data-fe` via `file:` or published version). No network services.
+- None. Consumers install `@market-data/brand` as a package dependency (published version or equivalent). No network services.
 
 ### Input / output contracts
 

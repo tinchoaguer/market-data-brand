@@ -109,6 +109,6 @@ Public export map:
 
 This repo adopts the AI Harness for Specification-Driven Development. See [HARNESS.md](./HARNESS.md).
 
-1. Open `market-data-brand/` as the Cursor workspace (PROJECT_ROOT)
-2. Ensure agents from `../harness/agents/` are installed to `~/.cursor/agents/`
+1. Open this repository as the Cursor workspace (PROJECT_ROOT)
+2. Install harness agents per `HARNESS.md`
 3. Start the Orchestrator and run: `Start Feature <slug>`

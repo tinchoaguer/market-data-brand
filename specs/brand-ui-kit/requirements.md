@@ -2,7 +2,7 @@
 
 ## Overview
 
-Turn `market-data-brand` into a publishable UI library. The package ships React UI primitives and a generated CSS bundle for product consumers (notably `market-data-fe`). Radix, Tailwind, and shadcn remain private implementation details inside brand. Consumers import components and CSS without installing or configuring Tailwind.
+Turn `market-data-brand` into a publishable UI library. The package ships React UI primitives and a generated CSS bundle for product consumers of `@market-data/brand`. Radix, Tailwind, and shadcn remain private implementation details inside brand. Consumers import components and CSS without installing or configuring Tailwind.
 
 ## Goals
 

@@ -21,8 +21,8 @@
   --duration-slow: 320ms;
   --easing-emphasized: cubic-bezier(0.2, 0, 0, 1.2);
   --easing-standard: cubic-bezier(0.2, 0, 0, 1);
-  --font-mono: "IBM Plex Mono", "Consolas", monospace;
-  --font-sans: "Sora", "Segoe UI", sans-serif;
+  --font-mono: "Geist Mono", "Consolas", monospace;
+  --font-sans: "Geist Sans", "Segoe UI", sans-serif;
   --font-size-2xl: 2rem;
   --font-size-3xl: 2.75rem;
   --font-size-lg: 1.125rem;

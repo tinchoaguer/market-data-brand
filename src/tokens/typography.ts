@@ -1,7 +1,7 @@
 /** Font stacks and type scale for product UI. */
 export const font = {
-  sans: '"Sora", "Segoe UI", sans-serif',
-  mono: '"IBM Plex Mono", "Consolas", monospace',
+  sans: '"Geist Sans", "Segoe UI", sans-serif',
+  mono: '"Geist Mono", "Consolas", monospace',
 } as const
 
 export const fontSize = {

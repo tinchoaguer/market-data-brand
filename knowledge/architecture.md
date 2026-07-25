@@ -7,7 +7,8 @@
 ```
 market-data-brand/
 ├── knowledge/
-│   └── writing/             # agent-facing copy guidelines
+│   ├── writing/             # agent-facing copy guidelines
+│   └── visual-definitions/  # UX Regions / composition / layout SoT
 ├── src/
 │   ├── locales/             # locale catalogs (default: en.json)
 │   ├── tokens/              # TS design tokens + wording loader
@@ -26,6 +27,7 @@ market-data-brand/
 | **Design tokens** | Colors, space, type, radius, motion as TS → CSS vars |
 | **Wording** | Locale catalogs + typed wording export for shared copy |
 | **Writing guidelines** | Agent-facing tone, terminology, and DS inventory under `knowledge/writing/` |
+| **Visual definitions** | UX Regions / composition / layout SoT under `knowledge/visual-definitions/`; adopting apps receive snapshots via product UX Feature Writer (`knowledge/ux/*-contract.md`), not by reading this repo from the harness |
 | **Logo** | Configurable logo components and favicon export |
 | **Brand Studio** | Local Vite app to preview tokens, logo, wording, UI kit |
 | **UI kit** | React primitives (controls + layout) + generated stylesheet for product apps |

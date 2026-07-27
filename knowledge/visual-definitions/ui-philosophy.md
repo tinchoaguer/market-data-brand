@@ -18,9 +18,9 @@ Every score must be explainable.
 
 Progressive disclosure over information density.
 
-One asset at a time.
+One Symbol at a time.
 
-The asset is always the protagonist.
+The Symbol is always the protagonist.
 
 Analysis precedes raw numbers.
 

@@ -13,5 +13,18 @@
       "A consumer can import the components and CSS without installing Tailwind."
     ],
     "status": "Done"
+  },
+  {
+    "id": 2,
+    "slug": "visual-definitions-index",
+    "title": "Visual Definitions Index",
+    "description": "Add a navigable index/README for Reading and Analysis visual-definition stacks under knowledge/visual-definitions/, and align ui-philosophy terminology to Symbol (not Asset) so SoT language matches domain language and terminology.",
+    "acceptance": [
+      "An index or README under knowledge/visual-definitions/ lists the Reading document stack and the Analysis document stack with short roles for each file.",
+      "ui-philosophy.md uses Symbol (not Asset) as the protagonist term, consistent with domain-language and terminology.",
+      "Cross-links from the index reach reading-model, reading-composition-model, reading-layout-blueprint, reading-layout-specification, and the analysis/ subtree docs.",
+      "No hi-fi Figma or FE implementation work is required for this Feature."
+    ],
+    "status": "Done"
   }
 ]

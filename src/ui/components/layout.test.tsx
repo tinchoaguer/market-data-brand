@@ -33,7 +33,7 @@ describe('layout primitives', () => {
   })
 
   it('renders Page title hierarchy', () => {
-    render(
+    const { container } = render(
       <Page>
         <PageEyebrow>MD</PageEyebrow>
         <PageTitle>Market data</PageTitle>
@@ -42,6 +42,25 @@ describe('layout primitives', () => {
 
     expect(screen.getByText('MD')).toBeInTheDocument()
     expect(screen.getByRole('heading', { level: 1, name: 'Market data' })).toBeInTheDocument()
+    expect(container.firstChild).toBeInstanceOf(HTMLElement)
+    expect((container.firstChild as HTMLElement)).toHaveAttribute(
+      'data-page-width',
+      'default',
+    )
+  })
+
+  it('renders full-width Page for workstation surfaces', () => {
+    const { container } = render(
+      <Page width="full" data-testid="full-page">
+        <PageTitle>Reading</PageTitle>
+      </Page>,
+    )
+
+    expect(screen.getByTestId('full-page')).toHaveAttribute(
+      'data-page-width',
+      'full',
+    )
+    expect((container.firstChild as HTMLElement).className).toContain('max-w-none')
   })
 
   it('renders Stack, Cluster, and Text helpers', () => {

@@ -33,7 +33,7 @@ export const AppHeader = React.forwardRef<
 ))
 AppHeader.displayName = 'AppHeader'
 
-/** Centered max-width row inside the header for brand + nav. */
+/** Header content row — full viewport width with horizontal padding (matches Page `width="full"`). */
 export const AppHeaderBar = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
@@ -41,7 +41,7 @@ export const AppHeaderBar = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      'mx-auto flex w-full max-w-5xl flex-wrap items-center gap-4 px-8 py-4',
+      'mx-auto flex w-full max-w-none flex-wrap items-center gap-4 px-8 py-4',
       className,
     )}
     {...props}

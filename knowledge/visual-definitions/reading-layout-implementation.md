@@ -48,8 +48,8 @@ Reading workspace is a **vertical stack of bands**. Gaps between bands use brand
 │ Context band (full width) — compact identity strip            │
 ├──────────────────────────────────┬──────────────────────────┤
 │ Primary band                     │                          │
-│ Analysis (~2/3–3/4)              │ Classification (~1/4–1/3)│
-│ grow / primary chrome            │ content-sized, capped    │
+│ Analysis (~3/5)                  │ Classification (~2/5)    │
+│ majority / primary chrome        │ minority, height-bound   │
 ├──────────────────────────────────┴──────────────────────────┤
 │ Supporting band                                               │
 │ Evidence (~3/5)              │ Market Data (~2/5)             │
@@ -71,10 +71,8 @@ Reading workspace is a **vertical stack of bands**. Gaps between bands use brand
 
 | Pair | Target share | Implementation intent |
 |------|--------------|------------------------|
-| Analysis : Classification | **~3:1** (range 2:1–3:1) | Analysis grows (`flex-1` / primary slot). Classification is **content-sized with max-width** — never equal flex share with Analysis |
-| Evidence : Market Data | **~3:2** | Prefer explicit share (e.g. grow factors or max-width on Market Data). **Do not** default both to equal `flex-1` when that produces a 50/50 wall |
-
-If kit primitives cannot express uneven shares yet, prefer capping Market Data / Classification width over giving them equal flex growth with the larger sibling.
+| Analysis : Classification | **~3:2** (same as Evidence : Market Data) | Analysis `majority`; Classification `minority` (height-bound + scroll) |
+| Evidence : Market Data | **~3:2** | Evidence `majority`; Market Data `minority` (height-bound + scroll) |
 
 ---
 
@@ -100,7 +98,7 @@ Maps Specification “allocated space” to chrome density (not semantic rank).
 |--------|--------------|--------------|
 | Context | Bare `Stack` / strip | Identity text only; no Card |
 | Analysis | **One** primary `Card` (or equivalent single primary surface) for the Region | Peer units: **shared skeleton, no competing Region-level Cards** — see Analysis implementation |
-| Classification | **One** compact associated `Card` (fills Analysis sibling height; body scrolls) | Dense groups / tables inside; no four equal Cards |
+| Classification | **One** associated `Card` + `SectionHeading` (same type scale as Evidence / Market Data) | Dense groups / tables inside; height-bound `minority` scroll beside Analysis |
 | Evidence | Bare Region heading + body | Claim blocks may use light separators / one Card per claim **only if** needed for scan; never a primary wall |
 | Market Data | Bare Region heading + body | Section landmarks (Price / Order book / Candles); Cards only if they aid scan and stay secondary. Candles tables stay collapsed until expanded so the column does not outgrow Evidence; supporting `ClusterItem` minority is height-bound to Evidence with scroll |
 | Diagnostics | Bare / quiet | Elevated: `Alert` (or equivalent), not a hero Card |
@@ -172,8 +170,8 @@ Prefer kit `Stack` / `Inline` / `Cluster` gap props. Do not invent a parallel sp
 
 | Reading slot | `ClusterItem` share |
 |--------------|---------------------|
-| Analysis (beside Classification) | `majority` (or `fill` if Classification is `aside`) |
-| Classification | `aside` (capped; never equal flex with Analysis) |
+| Analysis (beside Classification) | `majority` |
+| Classification | `minority` (same proportion as Market Data) |
 | Evidence | `majority` |
 | Market Data | `minority` |
 
@@ -183,7 +181,7 @@ Prefer kit `Stack` / `Inline` / `Cluster` gap props. Do not invent a parallel sp
 
 A layout implementation is successful when:
 
-- Desktop Reading reads as one workstation: Analysis dominates; Classification is a narrow aside
+- Desktop Reading reads as one workstation: Analysis dominates; Classification shares the primary row at ~3:2 with Analysis
 - Evidence and Market Data are supporting, not a 50/50 second hero row by default
 - Region chrome weight matches prominence
 - Gaps feel consistent across bands (workspace `xl`, dense asides `sm`)

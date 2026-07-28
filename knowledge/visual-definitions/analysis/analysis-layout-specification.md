@@ -33,8 +33,9 @@ Analysis regions: [`analysis-layout-blueprint.md`](./analysis-layout-blueprint.m
 | Analysis Composition Model | Attention flow and priority within Analysis |
 | Analysis Layout Blueprint | Spatial Regions inside the Reading’s Analysis Region |
 | Analysis Layout Specification (this doc) | Structural arrangement of those Regions |
+| [Analysis Layout Implementation](./analysis-layout-implementation.md) | Peer collection, Recommendation density, Analysis chrome |
 | Reading Layout Specification | Structural arrangement of Reading-wide Regions |
-| Implementation / wireframes (later) | Grids, components, spacing tokens, responsive rules |
+| [Reading Layout Implementation](../reading-layout-implementation.md) | Reading band ratios, density, chrome |
 
 This Specification nests under the Reading Layout Specification’s Analysis Region. It does not invent Overall Assessment or Synthesis Regions.
 

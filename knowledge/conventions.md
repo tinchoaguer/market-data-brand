@@ -48,6 +48,8 @@ Rules:
 
 - Studio and labs under `src/brand/` are for local preview; they are not the public product UI
 - Prefer reusing the same exported components in Studio that consumers will import
+- Do not maintain a full Symbol Reading (or other product screen) demo in Studio — product layout iteration belongs in the consuming app; Studio previews kit primitives only
+- Design → implementation loop (markdown SoT, Brand vs FE split, no paid Figma): [`visual-definitions/design-to-implementation.md`](./visual-definitions/design-to-implementation.md)
 
 ## Specifications
 

@@ -1,21 +1,27 @@
 import { describe, expect, it } from 'vitest'
 import { render, screen } from '@testing-library/react'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './card'
+import { Card, CardContent, CardHeader, CardTitle } from './card'
 
 describe('Card', () => {
-  it('renders a brand surface container', () => {
+  it('renders Card fill and scroll content variants', () => {
     render(
-      <Card>
+      <Card height="fill" data-testid="fill-card">
         <CardHeader>
-          <CardTitle>Snapshot</CardTitle>
-          <CardDescription>Daily summary</CardDescription>
+          <CardTitle>Bound</CardTitle>
         </CardHeader>
-        <CardContent>Body</CardContent>
+        <CardContent scroll data-testid="scroll-body">
+          Body
+        </CardContent>
       </Card>,
     )
 
-    expect(screen.getByText('Snapshot')).toBeInTheDocument()
-    expect(screen.getByText('Daily summary')).toBeInTheDocument()
-    expect(screen.getByText('Body')).toBeInTheDocument()
+    expect(screen.getByTestId('fill-card')).toHaveAttribute(
+      'data-card-height',
+      'fill',
+    )
+    expect(screen.getByTestId('scroll-body')).toHaveAttribute(
+      'data-card-scroll',
+      'true',
+    )
   })
 })

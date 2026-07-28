@@ -24,7 +24,7 @@ Principles: [`ui-philosophy.md`](./ui-philosophy.md).
 | Reading Composition Model | Visual priority, attention flow, prominence |
 | Reading Layout Blueprint (this doc) | Spatial Regions and their responsibilities |
 | Reading Layout Specification | Structural arrangement of those Regions |
-| Implementation / wireframes (later) | Grids, components, spacing tokens, responsive rules |
+| [Reading Layout Implementation](./reading-layout-implementation.md) | Band ratios, density, chrome, breakpoints (UI kit) |
 
 ---
 

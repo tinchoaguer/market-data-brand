@@ -16,6 +16,10 @@ export {
   CardTitle,
   CardDescription,
   CardContent,
+  cardVariants,
+  cardContentVariants,
+  type CardProps,
+  type CardContentProps,
 } from './components/card'
 export {
   Table,
@@ -67,8 +71,10 @@ export {
   ClusterItem,
   stackVariants,
   inlineVariants,
+  clusterItemVariants,
   type StackProps,
   type InlineProps,
+  type ClusterItemProps,
 } from './components/stack'
 export {
   Text,

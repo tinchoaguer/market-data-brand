@@ -35,3 +35,5 @@ Visual hierarchy and attention flow: [`reading-composition-model.md`](./reading-
 Spatial Regions for a Reading: [`reading-layout-blueprint.md`](./reading-layout-blueprint.md).
 
 Structural arrangement of Regions: [`reading-layout-specification.md`](./reading-layout-specification.md).
+
+Implementable band ratios, density, and chrome: [`reading-layout-implementation.md`](./reading-layout-implementation.md).

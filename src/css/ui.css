@@ -397,11 +397,17 @@
   .h-\[var\(--radix-select-trigger-height\)\] {
     height: var(--radix-select-trigger-height);
   }
+  .h-full {
+    height: 100%;
+  }
   .h-px {
     height: 1px;
   }
   .max-h-96 {
     max-height: calc(var(--spacing) * 96);
+  }
+  .min-h-0 {
+    min-height: 0;
   }
   .min-h-screen {
     min-height: 100vh;
@@ -435,6 +441,15 @@
   }
   .flex-1 {
     flex: 1;
+  }
+  .flex-\[2\] {
+    flex: 2;
+  }
+  .flex-\[3\] {
+    flex: 3;
+  }
+  .flex-none {
+    flex: none;
   }
   .shrink-0 {
     flex-shrink: 0;
@@ -495,6 +510,9 @@
   }
   .overflow-hidden {
     overflow: hidden;
+  }
+  .overflow-y-auto {
+    overflow-y: auto;
   }
   .rounded-\[var\(--radius-lg\)\] {
     border-radius: var(--radius-lg);
@@ -618,6 +636,9 @@
   }
   .bg-transparent {
     background-color: transparent;
+  }
+  .fill-card {
+    fill: var(--card);
   }
   .p-1 {
     padding: var(--spacing);
@@ -964,9 +985,49 @@
       background-color: var(--muted);
     }
   }
+  .md\:absolute {
+    @media (width >= 48rem) {
+      position: absolute;
+    }
+  }
+  .md\:relative {
+    @media (width >= 48rem) {
+      position: relative;
+    }
+  }
+  .md\:inset-0 {
+    @media (width >= 48rem) {
+      inset: 0;
+    }
+  }
+  .md\:min-h-0 {
+    @media (width >= 48rem) {
+      min-height: 0;
+    }
+  }
+  .md\:w-\[min\(100\%\,20rem\)\] {
+    @media (width >= 48rem) {
+      width: min(100%, 20rem);
+    }
+  }
   .md\:flex-row {
     @media (width >= 48rem) {
       flex-direction: row;
+    }
+  }
+  .md\:self-stretch {
+    @media (width >= 48rem) {
+      align-self: stretch;
+    }
+  }
+  .md\:overflow-hidden {
+    @media (width >= 48rem) {
+      overflow: hidden;
+    }
+  }
+  .md\:overflow-y-auto {
+    @media (width >= 48rem) {
+      overflow-y: auto;
     }
   }
   .\[\&_p\]\:leading-relaxed {
@@ -1011,6 +1072,26 @@
   .\[\&\:has\(\[role\=checkbox\]\)\]\:pr-0 {
     &:has([role=checkbox]) {
       padding-right: 0;
+    }
+  }
+  .\[\&\>\[data-region-id\]\]\:flex {
+    &>[data-region-id] {
+      display: flex;
+    }
+  }
+  .\[\&\>\[data-region-id\]\]\:h-full {
+    &>[data-region-id] {
+      height: 100%;
+    }
+  }
+  .\[\&\>\[data-region-id\]\]\:min-h-0 {
+    &>[data-region-id] {
+      min-height: 0;
+    }
+  }
+  .\[\&\>\[data-region-id\]\]\:flex-col {
+    &>[data-region-id] {
+      flex-direction: column;
     }
   }
   .\[\&\>span\]\:line-clamp-1 {

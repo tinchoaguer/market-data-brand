@@ -60,7 +60,42 @@ describe('layout primitives', () => {
     expect(screen.getByText('Muted').className).toContain('text-[var(--muted-foreground)]')
     expect(screen.getByText('Symbol')).toBeInTheDocument()
     expect(screen.getByRole('heading', { level: 3, name: 'Bids' })).toBeInTheDocument()
-    expect(container.firstChild?.className).toContain('flex-col')
-    expect(container.firstChild?.className).toContain('gap-6')
+    const root = container.firstChild
+    expect(root).toBeInstanceOf(HTMLElement)
+    expect((root as HTMLElement).className).toContain('flex-col')
+    expect((root as HTMLElement).className).toContain('gap-6')
+  })
+
+  it('applies ClusterItem share variants for uneven Reading bands', () => {
+    render(
+      <Cluster data-testid="cluster">
+        <ClusterItem share="majority" data-testid="majority">
+          Evidence
+        </ClusterItem>
+        <ClusterItem share="minority" data-testid="minority">
+          Market Data
+        </ClusterItem>
+        <ClusterItem share="aside" data-testid="aside">
+          Classification
+        </ClusterItem>
+      </Cluster>,
+    )
+
+    expect(screen.getByTestId('majority')).toHaveAttribute(
+      'data-cluster-share',
+      'majority',
+    )
+    expect(screen.getByTestId('majority').className).toContain('flex-[3]')
+    expect(screen.getByTestId('minority')).toHaveAttribute(
+      'data-cluster-bound',
+      'true',
+    )
+    expect(screen.getByTestId('aside')).toHaveAttribute(
+      'data-cluster-bound',
+      'true',
+    )
+    expect(
+      screen.getByTestId('aside').querySelector('[data-cluster-bound-panel]'),
+    ).not.toBeNull()
   })
 })

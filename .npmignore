@@ -1,0 +1,6 @@
+**/wording.catalog.test.ts
+**/*.test.ts
+**/*.test.tsx
+**/*.spec.ts
+**/*.spec.tsx
+studio-dist/

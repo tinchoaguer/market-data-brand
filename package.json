@@ -1,7 +1,7 @@
 {
   "name": "@maguer/market-data-brand",
   "private": false,
-  "version": "0.1.1",
+  "version": "0.1.2",
   "type": "module",
   "exports": {
     "./tokens.css": "./src/css/tokens.css",
@@ -9,8 +9,9 @@
     "./wording": "./src/tokens/wording.ts",
     "./locales/en": "./src/locales/en.json",
     "./logo": "./src/brand/components/Logo.tsx",
+    "./logo-config": "./src/brand/logo-config.ts",
     "./ui": {
-      "types": "./dist/ui.d.ts",
+      "types": "./dist/index.d.ts",
       "import": "./dist/ui.js",
       "default": "./dist/ui.js"
     },
@@ -19,9 +20,20 @@
   "files": [
     "dist",
     "src/css",
-    "src/tokens",
+    "src/tokens/colors.ts",
+    "src/tokens/flatten.ts",
+    "src/tokens/index.ts",
+    "src/tokens/motion.ts",
+    "src/tokens/radius.ts",
+    "src/tokens/space.ts",
+    "src/tokens/typography.ts",
+    "src/tokens/wording.ts",
     "src/locales",
     "src/brand/components",
+    "src/brand/geometry",
+    "src/brand/logo-config.ts",
+    "src/brand/logo-theme.ts",
+    "src/brand/types.ts",
     "README.md"
   ],
   "peerDependencies": {
@@ -32,6 +44,7 @@
     "dev": "npm run ui:generate && vite",
     "build": "npm run build:lib && tsc --noEmit && vite build",
     "build:lib": "npm run ui:generate && vite build --config vite.ui.config.ts",
+    "prepublishOnly": "npm run build:lib",
     "preview": "vite preview",
     "tokens:generate": "tsx scripts/generate-tokens-css.ts",
     "ui:generate": "npm run tokens:generate && tsx scripts/generate-ui-css.ts",

@@ -23,8 +23,16 @@ describe('package exports and consumer contract', () => {
     expect(pkg.exports['./wording']).toBe('./src/tokens/wording.ts')
     expect(pkg.exports['./locales/en']).toBe('./src/locales/en.json')
     expect(pkg.exports['./logo']).toBe('./src/brand/components/Logo.tsx')
+    expect(pkg.exports['./logo-config']).toBe('./src/brand/logo-config.ts')
 
-    for (const key of ['./tokens', './tokens.css', './wording', './locales/en', './logo'] as const) {
+    for (const key of [
+      './tokens',
+      './tokens.css',
+      './wording',
+      './locales/en',
+      './logo',
+      './logo-config',
+    ] as const) {
       const target = resolveExportTarget(pkg.exports[key])
       expect(target, key).toBeTruthy()
       expect(existsSync(join(root, target!))).toBe(true)
@@ -50,7 +58,7 @@ describe('package exports and consumer contract', () => {
     const importPath = ui.import ?? ui.default
     const typesPath = ui.types
     expect(importPath).toBe('./dist/ui.js')
-    expect(typesPath).toBe('./dist/ui.d.ts')
+    expect(typesPath).toBe('./dist/index.d.ts')
     expect(existsSync(join(root, importPath!))).toBe(true)
     expect(existsSync(join(root, typesPath!))).toBe(true)
   })

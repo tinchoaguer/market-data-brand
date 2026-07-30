@@ -1,6 +1,6 @@
 {
-  "name": "@market-data/brand",
-  "private": true,
+  "name": "@maguer/market-data-brand",
+  "private": false,
   "version": "0.1.0",
   "type": "module",
   "exports": {

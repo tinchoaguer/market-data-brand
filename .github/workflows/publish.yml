@@ -1,72 +1,26 @@
-name: Publish Package to npm
+name: Publish Package
 
 on:
-  release:
-    types: [published] # Triggers automatically when you create a GitHub Release
-
-concurrency:
-  group: publish-${{ github.event.release.tag_name }}
-  cancel-in-progress: true
+  push:
+    tags:
+      - 'v*'
 
 permissions:
+  id-token: write  # Required for OIDC
   contents: read
-  id-token: write # Required for OIDC trusted publishing authentication
 
 jobs:
   publish:
-    if: github.event.release.draft == false
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      id-token: write
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
-          node-version: '20'
+          node-version: '24'
           registry-url: 'https://registry.npmjs.org'
-
-      - name: Cache npm
-        uses: actions/cache@v4
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build (if present)
-        run: npm run build --if-present
-
-      - name: Verify package version matches release tag
-        env:
-          RELEASE_TAG: ${{ github.event.release.tag_name }}
-        run: |
-          pkg_version=$(node -p "require('./package.json').version")
-          # Strip a leading "v" from the release tag if present
-          tag_no_v="${RELEASE_TAG#v}"
-          if [ "$pkg_version" != "$tag_no_v" ]; then
-            echo "Package version ($pkg_version) does not match release tag ($RELEASE_TAG)"
-            exit 1
-          fi
-
-      - name: Configure npm authentication
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: |
-          if [ -z "$NPM_TOKEN" ]; then
-            echo "ERROR: NPM_TOKEN secret is not set in repository secrets"
-            exit 1
-          fi
-          echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
-
-      - name: Publish to npm
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm publish --access public
+          package-manager-cache: false  # never use caching in release builds
+      - run: npm ci
+      - run: npm run build --if-present
+      - run: npm test
+      - run: npm publish  # Or: npm stage publish

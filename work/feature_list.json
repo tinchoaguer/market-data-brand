@@ -26,5 +26,22 @@
       "No hi-fi Figma or FE implementation work is required for this Feature."
     ],
     "status": "Done"
+  },
+  {
+    "id": 3,
+    "slug": "dashboard-surface-kit",
+    "title": "Dashboard Surface Kit",
+    "description": "Close UI kit and token gaps required for dashboard-mockup surface fidelity: denser header spacing, theme-toggle control, timeframe pill / segmented control pattern, sparkline or chart-area chrome recipe, Live/status footer pattern, and semantic up/down emphasis — so consumers can compose the dark dashboard without inventing a parallel design system.",
+    "acceptance": [
+      "Theme-toggle control is exported from `@market-data/brand/ui` (or documented kit pattern) and previewable in Brand Studio.",
+      "Timeframe pill / segmented control pattern is available as a brand primitive or documented composition recipe using brand exports.",
+      "Sparkline and/or chart-area chrome recipe exists in the brand kit (tokens and/or component pattern) for consumer chart surfaces.",
+      "Live / status footer pattern is available as a brand primitive or documented composition recipe.",
+      "Semantic up/down (positive/negative) emphasis is expressible via brand tokens and/or kit styling without ad-hoc consumer color invention.",
+      "Header density / spacing tokens or AppShell header recipes support a slim dashboard chrome bar.",
+      "New or extended tokens go through the TS → generated CSS pipeline (`npm run tokens:generate`); no hand-edited `src/css/tokens.css`.",
+      "Public package exports for any new UI primitives are documented; Brand Studio can preview them."
+    ],
+    "status": "Pending"
   }
 ]

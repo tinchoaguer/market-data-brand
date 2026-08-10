@@ -1,8 +1,8 @@
-name: Publish Package to npm (OIDC)
+name: Publish Package to npm
 
 on:
   release:
-    types: [published]
+    types: [published] # Triggers automatically when you create a GitHub Release
 
 concurrency:
   group: publish-${{ github.event.release.tag_name }}
@@ -10,7 +10,7 @@ concurrency:
 
 permissions:
   contents: read
-  id-token: write
+  id-token: write # Required for OIDC trusted publishing authentication
 
 jobs:
   publish:
@@ -49,41 +49,24 @@ jobs:
           RELEASE_TAG: ${{ github.event.release.tag_name }}
         run: |
           pkg_version=$(node -p "require('./package.json').version")
+          # Strip a leading "v" from the release tag if present
           tag_no_v="${RELEASE_TAG#v}"
           if [ "$pkg_version" != "$tag_no_v" ]; then
             echo "Package version ($pkg_version) does not match release tag ($RELEASE_TAG)"
             exit 1
           fi
 
-      - name: Request OIDC ID token
-        id: idtoken
-        run: |
-          # ACTIONS_ID_TOKEN_REQUEST_URL and ACTIONS_ID_TOKEN_REQUEST_TOKEN are provided by the runner
-          audience="${{ secrets.TOKEN_EXCHANGE_AUDIENCE || 'npm-token-exchange' }}"
-          id_token=$(curl -s -X GET "${ACTIONS_ID_TOKEN_REQUEST_URL}?audience=${audience}" -H "Authorization: Bearer ${ACTIONS_ID_TOKEN_REQUEST_TOKEN}")
-          echo "token=$id_token" >> $GITHUB_OUTPUT
-
-      - name: Exchange ID token for ephemeral npm token
-        id: exchange
-        env:
-          ID_TOKEN: ${{ steps.idtoken.outputs.token }}
-          TOKEN_EXCHANGE_URL: ${{ secrets.TOKEN_EXCHANGE_URL }}
-        run: |
-          if [ -z "$TOKEN_EXCHANGE_URL" ]; then
-            echo "ERROR: TOKEN_EXCHANGE_URL secret is not set"
-            exit 1
-          fi
-          resp=$(curl -s -X POST "$TOKEN_EXCHANGE_URL" -H "Content-Type: application/json" -d "{\"id_token\":\"$ID_TOKEN\",\"repo\":\"${{ github.repository }}\",\"ref\":\"${{ github.ref }}\"}")
-          npm_token=$(echo "$resp" | jq -r .npm_token)
-          if [ -z "$npm_token" ] || [ "$npm_token" = "null" ]; then
-            echo "Token exchange failed: $resp"
-            exit 1
-          fi
-          echo "token=$npm_token" >> $GITHUB_OUTPUT
-
       - name: Configure npm authentication
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
-          echo "//registry.npmjs.org/:_authToken=${{ steps.exchange.outputs.token }}" > ~/.npmrc
+          if [ -z "$NPM_TOKEN" ]; then
+            echo "ERROR: NPM_TOKEN secret is not set in repository secrets"
+            exit 1
+          fi
+          echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
 
       - name: Publish to npm
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npm publish --access public

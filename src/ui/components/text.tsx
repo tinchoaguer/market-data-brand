@@ -7,6 +7,10 @@ const textVariants = cva('', {
     tone: {
       default: 'text-[var(--foreground)]',
       muted: 'text-[var(--muted-foreground)]',
+      /** Up / positive directional emphasis (`--semantic-positive`). */
+      positive: 'text-[var(--positive)]',
+      /** Down / negative directional emphasis (`--semantic-negative`). */
+      negative: 'text-[var(--negative)]',
     },
     size: {
       xs: 'text-xs',

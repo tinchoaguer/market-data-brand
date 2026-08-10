@@ -46,6 +46,8 @@ Information architecture for these entities: [`../visual-definitions/domain-lang
 | Loading… | In-progress fetch or compute (use ellipsis character) |
 | Something went wrong | Generic error |
 | Try again | Generic retry action |
+| Toggle color theme | Accessible name for the theme-toggle control |
+| Live | Quiet status footer indicator for an active data stream |
 
 ## Writing rule
 

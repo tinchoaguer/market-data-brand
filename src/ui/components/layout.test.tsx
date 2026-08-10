@@ -4,6 +4,7 @@ import {
   AppBrand,
   AppBrandName,
   AppHeader,
+  AppHeaderBar,
   AppMain,
   AppNav,
   AppShell,
@@ -30,6 +31,14 @@ describe('layout primitives', () => {
     expect(screen.getByText('Market Data')).toBeInTheDocument()
     expect(screen.getByRole('navigation', { name: 'Primary' })).toBeInTheDocument()
     expect(screen.getByText('content').closest('main')).toBeTruthy()
+  })
+
+  it('applies slim header density tokens on AppHeaderBar', () => {
+    render(<AppHeaderBar density="slim" data-testid="slim-bar" />)
+    const bar = screen.getByTestId('slim-bar')
+    expect(bar).toHaveAttribute('data-header-density', 'slim')
+    expect(bar.className).toContain('min-h-[var(--density-header-min-height)]')
+    expect(bar.className).toContain('py-[var(--density-header-padding-y)]')
   })
 
   it('renders Page title hierarchy', () => {

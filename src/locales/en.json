@@ -10,7 +10,9 @@
     "cancel": "Cancel",
     "loading": "Loading…",
     "error": "Something went wrong",
-    "retry": "Try again"
+    "retry": "Try again",
+    "themeToggle": "Toggle color theme",
+    "live": "Live"
   },
   "cta": {
     "viewMarket": "View market data",

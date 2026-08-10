@@ -82,9 +82,13 @@ import {
   Badge,
   Button,
   Card,
+  ChartFrame,
+  SegmentedControl,
   Select,
   Skeleton,
+  StatusFooter,
   Table,
+  ThemeToggle,
 } from '@market-data/brand/ui'
 ```
 
@@ -97,13 +101,108 @@ Public export map:
 
 | Export | Purpose |
 |---|---|
-| `@market-data/brand/ui` | Named React primitives (`Button`, `Select`, `Card`, `Table`, `Badge`, `Skeleton`, `Alert`, …) |
+| `@market-data/brand/ui` | Named React primitives (`Button`, `Select`, `Card`, `Table`, `Badge`, `Skeleton`, `Alert`, `ThemeToggle`, `SegmentedControl`, `StatusFooter`, `ChartFrame`, AppShell family, …) |
 | `@market-data/brand/ui.css` | Generated stylesheet (tokens + theme + component styles) |
 | `@market-data/brand/tokens` | TypeScript design tokens |
 | `@market-data/brand/tokens.css` | Token CSS variables only |
 | `@market-data/brand/wording` | Shared copy (default locale) |
 | `@market-data/brand/locales/en` | Default locale JSON catalog |
 | `@market-data/brand/logo` | Logo component |
+
+### Dashboard surface recipes
+
+Composition patterns for dark dashboard chrome. Use only public CSS variables and kit exports — no private Tailwind classes in product apps.
+
+#### Slim header
+
+```tsx
+import { AppHeader, AppHeaderBar, ThemeToggle } from '@market-data/brand/ui'
+
+<AppHeader>
+  <AppHeaderBar density="slim">
+    {/* brand + nav */}
+    <ThemeToggle value={theme} onValueChange={setTheme} />
+  </AppHeaderBar>
+</AppHeader>
+```
+
+Density tokens: `--density-header-padding-y`, `--density-header-padding-x`, `--density-header-gap`, `--density-header-min-height`, `--density-header-control-gap`.
+
+#### Theme toggle
+
+```tsx
+import { ThemeToggle } from '@market-data/brand/ui'
+import { wording } from '@market-data/brand/wording'
+
+// Accessible name defaults to wording.common.themeToggle
+<ThemeToggle value={theme} onValueChange={setTheme} />
+```
+
+The control is presentational: wire document/`data-theme` persistence in the consumer.
+
+#### Timeframe pills
+
+```tsx
+import { SegmentedControl } from '@market-data/brand/ui'
+
+<SegmentedControl
+  aria-label="Timeframe"
+  options={[
+    { value: '1D', label: '1D' },
+    { value: '1W', label: '1W' },
+    { value: '1M', label: '1M' },
+  ]}
+  value={tf}
+  onValueChange={setTf}
+/>
+```
+
+`TimeframeControl` is an alias of `SegmentedControl`. Option labels are consumer-supplied (not brand inventory).
+
+#### Semantic up / down
+
+Prefer brand tokens over ad-hoc hex:
+
+| Surface | Usage |
+|---|---|
+| CSS | `color: var(--semantic-positive)` / `var(--semantic-negative)` (aliases: `--positive`, `--negative`, `--color-positive`, `--color-negative`) |
+| Text | `<Text tone="positive">+1.2%</Text>` / `<Text tone="negative">−0.4%</Text>` |
+| Badge | `<Badge variant="positive">Up</Badge>` / `<Badge variant="negative">Down</Badge>` |
+
+#### Chart-area / sparkline chrome
+
+```tsx
+import { ChartFrame } from '@market-data/brand/ui'
+
+<ChartFrame header="Price" footer="24H">
+  {/* consumer chart engine / SVG series */}
+</ChartFrame>
+```
+
+| CSS variable | Role |
+|---|---|
+| `--chart-frame` / `--chart-frame-border` | Outer card chrome |
+| `--chart-plot` | Plot background |
+| `--chart-axis` / `--chart-grid` | Axis and grid accents |
+| `--chart-sparkline-stroke` / `--chart-sparkline-fill` | Sparkline series accents |
+| `--chart-chrome` | Crosshair / quiet chrome |
+
+`ChartFrame` does **not** plot data — it only frames consumer chart surfaces.
+
+#### Live / status footer
+
+```tsx
+import { StatusFooter } from '@market-data/brand/ui'
+import { wording } from '@market-data/brand/wording'
+
+<StatusFooter
+  status="live"
+  meta={<span>Source · Updated just now</span>}
+/>
+// default label is wording.common.live when status="live"
+```
+
+`LiveStatus` is an alias of `StatusFooter`.
 
 ## Harness
 

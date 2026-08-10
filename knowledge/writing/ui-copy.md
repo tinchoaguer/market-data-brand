@@ -39,6 +39,8 @@ Add a string to this package only when at least two surfaces (or a shared primit
 | `common.loading` | Loading… |
 | `common.error` | Something went wrong |
 | `common.retry` | Try again |
+| `common.themeToggle` | Toggle color theme |
+| `common.live` | Live |
 | `cta.viewMarket` | View market data |
 | `cta.viewAnalysis` | View analysis |
 | `cta.viewClassification` | View classification |

@@ -18,10 +18,13 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
+  ChartFrame,
+  Inline,
   Page,
   PageEyebrow,
   PageHeader,
   PageTitle,
+  SegmentedControl,
   Select,
   SelectContent,
   SelectItem,
@@ -29,6 +32,7 @@ import {
   SelectValue,
   Skeleton,
   Stack,
+  StatusFooter,
   Table,
   TableBody,
   TableCell,
@@ -36,11 +40,23 @@ import {
   TableHeader,
   TableRow,
   Text,
+  ThemeToggle,
+  type ThemeAppearance,
 } from '../ui/index'
 import './UiLab.css'
 
+const TIMEFRAME_OPTIONS = [
+  { value: '1D', label: '1D' },
+  { value: '1W', label: '1W' },
+  { value: '1M', label: '1M' },
+  { value: '3M', label: '3M' },
+  { value: '1Y', label: '1Y' },
+] as const
+
 export function UiLab() {
   const [symbol, setSymbol] = useState('AAPL')
+  const [theme, setTheme] = useState<ThemeAppearance>('dark')
+  const [timeframe, setTimeframe] = useState('1D')
 
   return (
     <div className="ui-lab">
@@ -63,6 +79,110 @@ export function UiLab() {
           <Button variant="destructive">Destructive</Button>
           <Button size="sm">Small</Button>
           <Button disabled>Disabled</Button>
+        </div>
+      </section>
+
+      <section className="ui-lab-section" aria-labelledby="ui-lab-theme-toggle">
+        <h2 id="ui-lab-theme-toggle">Theme toggle</h2>
+        <p className="ui-lab-layout-note">
+          Controlled light/dark switch. Persistence and document theme wiring stay in the consumer.
+        </p>
+        <div className="ui-lab-row">
+          <ThemeToggle value={theme} onValueChange={setTheme} />
+          <Text size="sm" tone="muted">
+            Appearance: {theme}
+          </Text>
+        </div>
+      </section>
+
+      <section className="ui-lab-section" aria-labelledby="ui-lab-timeframe">
+        <h2 id="ui-lab-timeframe">Timeframe / segmented control</h2>
+        <div className="ui-lab-row">
+          <SegmentedControl
+            aria-label="Timeframe"
+            options={TIMEFRAME_OPTIONS}
+            value={timeframe}
+            onValueChange={setTimeframe}
+          />
+          <Text size="sm" tone="muted">
+            Selected: {timeframe}
+          </Text>
+        </div>
+      </section>
+
+      <section className="ui-lab-section" aria-labelledby="ui-lab-semantic">
+        <h2 id="ui-lab-semantic">Semantic up / down</h2>
+        <p className="ui-lab-layout-note">
+          Use <code>Text tone=&quot;positive|negative&quot;</code>,{' '}
+          <code>Badge variant=&quot;positive|negative&quot;</code>, or{' '}
+          <code>var(--semantic-positive)</code> / <code>var(--semantic-negative)</code>.
+        </p>
+        <div className="ui-lab-row">
+          <Text tone="positive" weight="semibold" tabular>
+            +1.24%
+          </Text>
+          <Text tone="negative" weight="semibold" tabular>
+            −0.48%
+          </Text>
+          <Badge variant="positive">Up</Badge>
+          <Badge variant="negative">Down</Badge>
+        </div>
+      </section>
+
+      <section className="ui-lab-section" aria-labelledby="ui-lab-chart-chrome">
+        <h2 id="ui-lab-chart-chrome">Chart-area chrome</h2>
+        <p className="ui-lab-layout-note">
+          <code>ChartFrame</code> is a non-plotting frame. Sparkline stroke/fill use{' '}
+          <code>--chart-sparkline-*</code> tokens.
+        </p>
+        <ChartFrame
+          className="ui-lab-chart-frame"
+          header={<span>Price</span>}
+          footer={<span>Axis / chrome accents via brand chart tokens</span>}
+        >
+          <svg
+            className="ui-lab-sparkline"
+            viewBox="0 0 320 96"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+          >
+            <path
+              d="M0 72 C40 68 60 40 100 44 C140 48 160 20 200 28 C240 36 260 16 320 24"
+              fill="var(--chart-sparkline-fill)"
+              stroke="none"
+            />
+            <path
+              d="M0 72 C40 68 60 40 100 44 C140 48 160 20 200 28 C240 36 260 16 320 24"
+              fill="none"
+              stroke="var(--chart-sparkline-stroke)"
+              strokeWidth="2"
+            />
+            <line
+              x1="0"
+              y1="80"
+              x2="320"
+              y2="80"
+              stroke="var(--chart-grid)"
+              strokeDasharray="4 4"
+            />
+          </svg>
+        </ChartFrame>
+      </section>
+
+      <section className="ui-lab-section" aria-labelledby="ui-lab-status-footer">
+        <h2 id="ui-lab-status-footer">Live / status footer</h2>
+        <div className="ui-lab-footer-sample">
+          <StatusFooter
+            status="live"
+            meta={
+              <Inline gap="sm">
+                <span>Source: Brand Studio</span>
+                <span aria-hidden="true">·</span>
+                <span>Updated just now</span>
+              </Inline>
+            }
+          />
+          <StatusFooter status="idle" label="Idle" />
         </div>
       </section>
 
@@ -114,12 +234,20 @@ export function UiLab() {
                 <TableRow>
                   <TableCell>AAPL</TableCell>
                   <TableCell>198.40</TableCell>
-                  <TableCell>+1.2%</TableCell>
+                  <TableCell>
+                    <Text as="span" tone="positive" size="sm" tabular>
+                      +1.2%
+                    </Text>
+                  </TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell>MSFT</TableCell>
                   <TableCell>420.10</TableCell>
-                  <TableCell>-0.4%</TableCell>
+                  <TableCell>
+                    <Text as="span" tone="negative" size="sm" tabular>
+                      −0.4%
+                    </Text>
+                  </TableCell>
                 </TableRow>
               </TableBody>
             </Table>
@@ -136,6 +264,8 @@ export function UiLab() {
           <Badge variant="success">Success</Badge>
           <Badge variant="warning">Warning</Badge>
           <Badge variant="destructive">Destructive</Badge>
+          <Badge variant="positive">Positive</Badge>
+          <Badge variant="negative">Negative</Badge>
         </div>
       </section>
 
@@ -178,12 +308,13 @@ export function UiLab() {
         <h2 id="ui-lab-layout">Layout</h2>
         <p className="ui-lab-layout-note">
           App chrome and page structure for product apps. Prefer these over utility classNames in
-          consumers.
+          consumers. Use <code>AppHeaderBar density=&quot;slim&quot;</code> for compact dashboard
+          chrome.
         </p>
         <div className="ui-lab-layout-frame">
           <AppShell>
             <AppHeader>
-              <AppHeaderBar>
+              <AppHeaderBar density="slim">
                 <AppBrand>
                   <AppBrandName>Market Data</AppBrandName>
                 </AppBrand>
@@ -195,6 +326,7 @@ export function UiLab() {
                     Analysis
                   </Button>
                 </AppNav>
+                <ThemeToggle value={theme} onValueChange={setTheme} />
               </AppHeaderBar>
             </AppHeader>
             <AppMain>
@@ -209,6 +341,7 @@ export function UiLab() {
                 </Stack>
               </Page>
             </AppMain>
+            <StatusFooter status="live" meta={<span>Slim header + Live footer sample</span>} />
           </AppShell>
         </div>
       </section>

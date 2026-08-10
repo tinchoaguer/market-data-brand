@@ -1,4 +1,6 @@
-import { color, palette } from './colors.ts'
+import { chart } from './chart.ts'
+import { color, palette, semantic } from './colors.ts'
+import { density } from './density.ts'
 import { duration, easing } from './motion.ts'
 import { radius } from './radius.ts'
 import { space } from './space.ts'
@@ -16,6 +18,9 @@ import { flattenTokens, type JsonValue } from './flatten.ts'
 export const tokens = {
   palette,
   color,
+  semantic,
+  chart,
+  density,
   font,
   'font-size': fontSize,
   'font-weight': fontWeight,
@@ -32,8 +37,11 @@ export function tokensToCssVariables(): Record<string, string> {
 }
 
 export {
+  chart,
   color,
+  density,
   palette,
+  semantic,
   duration,
   easing,
   radius,
@@ -47,7 +55,9 @@ export {
   flattenTokens,
 }
 
-export type { ColorToken, PaletteKey } from './colors.ts'
+export type { ColorToken, PaletteKey, SemanticToken } from './colors.ts'
+export type { ChartToken } from './chart.ts'
+export type { DensityToken } from './density.ts'
 export type { SpaceToken } from './space.ts'
 export type { RadiusToken } from './radius.ts'
 export type { Wording } from './wording.ts'

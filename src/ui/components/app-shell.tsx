@@ -33,20 +33,34 @@ export const AppHeader = React.forwardRef<
 ))
 AppHeader.displayName = 'AppHeader'
 
+export type AppHeaderBarDensity = 'default' | 'slim'
+
+export interface AppHeaderBarProps extends React.HTMLAttributes<HTMLDivElement> {
+  /**
+   * Header chrome density.
+   * - `default` — standard kit padding
+   * - `slim` — compact dashboard chrome using `--density-header-*` tokens
+   */
+  density?: AppHeaderBarDensity
+}
+
 /** Header content row — full viewport width with horizontal padding (matches Page `width="full"`). */
-export const AppHeaderBar = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn(
-      'mx-auto flex w-full max-w-none flex-wrap items-center gap-4 px-8 py-4',
-      className,
-    )}
-    {...props}
-  />
-))
+export const AppHeaderBar = React.forwardRef<HTMLDivElement, AppHeaderBarProps>(
+  ({ className, density = 'default', ...props }, ref) => (
+    <div
+      ref={ref}
+      data-header-density={density}
+      className={cn(
+        'mx-auto flex w-full max-w-none flex-wrap items-center',
+        density === 'slim'
+          ? 'min-h-[var(--density-header-min-height)] gap-[var(--density-header-gap)] px-[var(--density-header-padding-x)] py-[var(--density-header-padding-y)]'
+          : 'gap-4 px-8 py-4',
+        className,
+      )}
+      {...props}
+    />
+  ),
+)
 AppHeaderBar.displayName = 'AppHeaderBar'
 
 /** Brand mark + product name cluster. */

@@ -56,4 +56,9 @@ describe('wording catalog parity', () => {
     expect(Object.keys(inventory).sort()).toEqual(Object.keys(catalog).sort())
     expect(inventory).toEqual(catalog)
   })
+
+  it('includes shared chrome keys for theme toggle and Live status', () => {
+    expect(en.common.themeToggle).toBe('Toggle color theme')
+    expect(en.common.live).toBe('Live')
+  })
 })

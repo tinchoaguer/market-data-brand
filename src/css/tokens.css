@@ -2,6 +2,14 @@
 /* Source of truth: src/tokens/*.ts */
 
 :root {
+  --chart-axis: #7FA8CC;
+  --chart-chrome: #EADBC8;
+  --chart-frame: #2C3E50;
+  --chart-frame-border: #4A6572;
+  --chart-grid: #4A6572;
+  --chart-plot: #1E2A38;
+  --chart-sparkline-fill: color-mix(in srgb, #A0C4DF 28%, transparent);
+  --chart-sparkline-stroke: #A0C4DF;
   --color-accent: #EADBC8;
   --color-accent-strong: #D5CEA3;
   --color-bg: #1E2A38;
@@ -9,6 +17,7 @@
   --color-danger: #B85042;
   --color-focus: #A0C4DF;
   --color-info: #D4A359;
+  --color-negative: #B85042;
   --color-positive: #A0C4DF;
   --color-surface: #2C3E50;
   --color-surface-muted: #4A6572;
@@ -16,6 +25,11 @@
   --color-text-inverse: #1E2A38;
   --color-text-muted: #7FA8CC;
   --color-warning: #D4A359;
+  --density-header-control-gap: 0.5rem;
+  --density-header-gap: 0.75rem;
+  --density-header-min-height: 2.75rem;
+  --density-header-padding-x: 1.5rem;
+  --density-header-padding-y: 0.5rem;
   --duration-fast: 120ms;
   --duration-normal: 200ms;
   --duration-slow: 320ms;
@@ -58,6 +72,8 @@
   --radius-none: 0;
   --radius-sm: 0.25rem;
   --radius-xl: 1rem;
+  --semantic-negative: #B85042;
+  --semantic-positive: #A0C4DF;
   --space-0: 0;
   --space-1: 0.25rem;
   --space-10: 2.5rem;

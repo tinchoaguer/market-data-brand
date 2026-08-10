@@ -55,6 +55,8 @@ export {
   AppBrandName,
   AppNav,
   AppMain,
+  type AppHeaderBarProps,
+  type AppHeaderBarDensity,
 } from './components/app-shell'
 export {
   Page,
@@ -85,3 +87,21 @@ export {
   type TextProps,
   type SectionHeadingProps,
 } from './components/text'
+export {
+  ThemeToggle,
+  type ThemeToggleProps,
+  type ThemeAppearance,
+} from './components/theme-toggle'
+export {
+  SegmentedControl,
+  TimeframeControl,
+  type SegmentedControlProps,
+  type SegmentedControlOption,
+} from './components/segmented-control'
+export {
+  StatusFooter,
+  LiveStatus,
+  type StatusFooterProps,
+  type StatusFooterKind,
+} from './components/status-footer'
+export { ChartFrame, type ChartFrameProps } from './components/chart-frame'

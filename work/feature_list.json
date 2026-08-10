@@ -42,6 +42,6 @@
       "New or extended tokens go through the TS → generated CSS pipeline (`npm run tokens:generate`); no hand-edited `src/css/tokens.css`.",
       "Public package exports for any new UI primitives are documented; Brand Studio can preview them."
     ],
-    "status": "Pending"
+    "status": "Done"
   }
 ]

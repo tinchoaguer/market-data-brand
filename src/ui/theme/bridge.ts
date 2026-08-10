@@ -21,6 +21,8 @@ export const THEME_BRIDGE_VARS = [
   '--success',
   '--warning',
   '--info',
+  '--positive',
+  '--negative',
 ] as const
 
 export type ThemeBridgeVar = (typeof THEME_BRIDGE_VARS)[number]
@@ -41,5 +43,7 @@ export const BRAND_TOKEN_VARS = [
   '--color-info',
   '--color-border',
   '--color-focus',
+  '--semantic-positive',
+  '--semantic-negative',
   '--radius-md',
 ] as const

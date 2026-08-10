@@ -35,6 +35,10 @@
   --info: var(--color-info);
   --info-foreground: var(--color-text-inverse);
 
+  /* Directional metric emphasis (price up/down) — prefer semantic.* tokens. */
+  --positive: var(--semantic-positive);
+  --negative: var(--semantic-negative);
+
   --border: var(--color-border);
   --input: var(--color-border);
   --ring: var(--color-focus);

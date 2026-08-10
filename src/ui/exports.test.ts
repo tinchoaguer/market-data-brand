@@ -83,3 +83,36 @@ describe('package exports and consumer contract', () => {
     expect(keys.some((k) => k.includes('radix'))).toBe(false)
   })
 })
+
+describe('dashboard surface UI exports', () => {
+  it('exports theme toggle, segmented control, status footer, and chart frame from the UI entry', async () => {
+    const ui = await import('./index')
+    expect(ui.ThemeToggle).toBeTruthy()
+    expect(ui.SegmentedControl).toBeTruthy()
+    expect(ui.TimeframeControl).toBe(ui.SegmentedControl)
+    expect(ui.StatusFooter).toBeTruthy()
+    expect(ui.LiveStatus).toBe(ui.StatusFooter)
+    expect(ui.ChartFrame).toBeTruthy()
+  })
+
+  it('preserves prior UI kit named exports', async () => {
+    const ui = await import('./index')
+    for (const name of [
+      'Button',
+      'Select',
+      'Card',
+      'Table',
+      'Badge',
+      'Skeleton',
+      'Alert',
+      'AppShell',
+      'AppHeader',
+      'AppHeaderBar',
+      'Page',
+      'Stack',
+      'Text',
+    ] as const) {
+      expect(ui[name], name).toBeTruthy()
+    }
+  })
+})

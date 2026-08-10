@@ -20,7 +20,9 @@
   "files": [
     "dist",
     "src/css",
+    "src/tokens/chart.ts",
     "src/tokens/colors.ts",
+    "src/tokens/density.ts",
     "src/tokens/flatten.ts",
     "src/tokens/index.ts",
     "src/tokens/motion.ts",

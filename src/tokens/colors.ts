@@ -38,6 +38,8 @@ export const color = {
   accent: palette.wheat,
   accentStrong: palette.clay,
   positive: palette.sky,
+  /** Down / negative directional emphasis (price change, deltas). */
+  negative: palette.terracotta,
   warning: palette.gold,
   danger: palette.terracotta,
   info: palette.gold,
@@ -45,3 +47,15 @@ export const color = {
 } as const
 
 export type ColorToken = keyof typeof color
+
+/**
+ * Directional metric emphasis (up/down). Prefer these over inventing
+ * consumer hex values for price change and similar deltas.
+ * Maps to `--semantic-positive` / `--semantic-negative` CSS variables.
+ */
+export const semantic = {
+  positive: palette.sky,
+  negative: palette.terracotta,
+} as const
+
+export type SemanticToken = keyof typeof semantic

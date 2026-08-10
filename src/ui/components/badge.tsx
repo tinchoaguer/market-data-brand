@@ -18,6 +18,12 @@ const badgeVariants = cva(
           'border-transparent bg-[var(--warning)] text-[var(--warning-foreground)]',
         destructive:
           'border-transparent bg-[var(--destructive)] text-[var(--destructive-foreground)]',
+        /** Up / positive metric chip. */
+        positive:
+          'border-transparent bg-[var(--positive)]/15 text-[var(--positive)]',
+        /** Down / negative metric chip. */
+        negative:
+          'border-transparent bg-[var(--negative)]/15 text-[var(--negative)]',
       },
     },
     defaultVariants: {

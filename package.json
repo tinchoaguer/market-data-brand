@@ -51,6 +51,7 @@
     "tokens:generate": "tsx scripts/generate-tokens-css.ts",
     "ui:generate": "npm run tokens:generate && tsx scripts/generate-ui-css.ts",
     "logo:export": "tsx scripts/export-logo.tsx",
+    "release:from-merge": "node scripts/release-from-merge.mjs",
     "test": "vitest run",
     "test:watch": "vitest"
   },

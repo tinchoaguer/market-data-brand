@@ -44,6 +44,7 @@ Agent-facing copy rules live under [`knowledge/writing/`](./knowledge/writing/):
 | `npm run ui:generate` | Tokens + theme bridge + component styles → `src/css/ui.css` |
 | `npm run build:lib` | Emit `dist/ui.js`, types, and `ui.css` |
 | `npm run logo:export` | Export SVG favicon from default config |
+| `npm run release:from-merge` | CI helper: resolve `bump_version` from new `work/history/` files |
 | `npm run build` | Library artifacts + Studio production build |
 | `npm test` | Unit / contract tests |
 
@@ -203,6 +204,18 @@ import { wording } from '@market-data/brand/wording'
 ```
 
 `LiveStatus` is an alias of `StatusFooter`.
+
+## Publishing
+
+Package version and npm publish are driven by Feature completion, not by hand-editing `package.json` in Feature PRs.
+
+1. When adding a Feature to `work/feature_list.json`, set required **`bump_version`**: `major` | `minor` | `patch` | `none`.
+2. Complete the Feature (Orchestrator writes `work/history/<slug>.md` and marks it `Done`).
+3. Merge to **`main`**.
+4. [`.github/workflows/release.yml`](./.github/workflows/release.yml) detects new history files, reads `bump_version` (strongest bump if several Features land together), runs `npm version`, and pushes tag `vX.Y.Z`.
+5. [`.github/workflows/publish.yml`](./.github/workflows/publish.yml) runs on `v*` tags (`build` → `test` → `npm publish`).
+
+Use `none` for docs-only or non-publishable Features. Do not bump `package.json` version inside Feature PRs — CI owns the version.
 
 ## Harness
 

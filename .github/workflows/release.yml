@@ -1,0 +1,40 @@
+name: Version and Tag
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  version-and-tag:
+    if: ${{ !contains(github.event.head_commit.message, 'chore(release):') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          # Push the version commit + tag with the default GITHUB_TOKEN.
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          package-manager-cache: false
+
+      - id: plan
+        name: Resolve bump from completed Features
+        env:
+          BEFORE_SHA: ${{ github.event.before }}
+          AFTER_SHA: ${{ github.sha }}
+        run: node scripts/release-from-merge.mjs
+
+      - name: Bump version, commit, and tag
+        if: ${{ steps.plan.outputs.skip != 'true' }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          npm version "${{ steps.plan.outputs.bump }}" -m "chore(release): %s"
+          git push origin HEAD:main --follow-tags

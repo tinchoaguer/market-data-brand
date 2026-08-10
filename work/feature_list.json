@@ -12,7 +12,8 @@
       "Public package exports for the UI kit and CSS are documented.",
       "A consumer can import the components and CSS without installing Tailwind."
     ],
-    "status": "Done"
+    "status": "Done",
+    "bump_version": "minor"
   },
   {
     "id": 2,
@@ -25,7 +26,8 @@
       "Cross-links from the index reach reading-model, reading-composition-model, reading-layout-blueprint, reading-layout-specification, and the analysis/ subtree docs.",
       "No hi-fi Figma or FE implementation work is required for this Feature."
     ],
-    "status": "Done"
+    "status": "Done",
+    "bump_version": "none"
   },
   {
     "id": 3,
@@ -42,6 +44,7 @@
       "New or extended tokens go through the TS → generated CSS pipeline (`npm run tokens:generate`); no hand-edited `src/css/tokens.css`.",
       "Public package exports for any new UI primitives are documented; Brand Studio can preview them."
     ],
-    "status": "Done"
+    "status": "Done",
+    "bump_version": "minor"
   }
 ]

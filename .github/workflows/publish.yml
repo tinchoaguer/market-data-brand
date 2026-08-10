@@ -1,27 +1,26 @@
-name: Publish Package to npm
+name: Publish Package
 
 on:
-  release:
-    types: [published] # Triggers automatically when you create a GitHub Release
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  id-token: write  # Required for OIDC
+  contents: read
 
 jobs:
   publish:
     runs-on: ubuntu-latest
-    permissions:
-      id-token: write # Required for OIDC trusted publishing authentication
-      contents: read
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
-          node-version: '20'
-          registry-url: 'https://npmjs.org'
-
-      - name: Install Dependencies
-        run: npm ci
-
-      - name: Publish to npm
-        run: npm publish
+          node-version: '24'
+          registry-url: 'https://registry.npmjs.org'
+          package-manager-cache: false  # never use caching in release builds
+      - run: npm ci
+      - run: npm run build --if-present
+      - run: npm test
+      - run: npm publish  # Or: npm stage publish

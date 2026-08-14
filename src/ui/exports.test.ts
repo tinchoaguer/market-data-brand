@@ -5,10 +5,13 @@ import { describe, expect, it } from 'vitest'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '../..')
 const pkg = JSON.parse(readFileSync(join(root, 'package.json'), 'utf8')) as {
+  private?: boolean
   exports: Record<string, string | { types?: string; import?: string; default?: string }>
   peerDependencies?: Record<string, string>
   dependencies?: Record<string, string>
   devDependencies?: Record<string, string>
+  publishConfig?: { access?: string }
+  scripts?: Record<string, string>
 }
 
 function resolveExportTarget(value: string | { types?: string; import?: string; default?: string }) {
@@ -63,9 +66,25 @@ describe('package exports and consumer contract', () => {
     expect(existsSync(join(root, typesPath!))).toBe(true)
   })
 
-  it('declares React as a peer dependency', () => {
+  it('declares React as a peer dependency, not a bundled runtime', () => {
     expect(pkg.peerDependencies?.react).toBeTruthy()
     expect(pkg.peerDependencies?.['react-dom']).toBeTruthy()
+    expect(pkg.dependencies?.react).toBeUndefined()
+    expect(pkg.dependencies?.['react-dom']).toBeUndefined()
+    expect(pkg.devDependencies?.react).toBeTruthy()
+    expect(pkg.devDependencies?.['react-dom']).toBeTruthy()
+  })
+
+  it('publishes the scoped package publicly', () => {
+    expect(pkg.private).toBe(false)
+    expect(pkg.publishConfig?.access).toBe('public')
+  })
+
+  it('keeps library and Brand Studio builds separate', () => {
+    expect(pkg.scripts?.['build:lib']).toContain('vite.ui.config.ts')
+    expect(pkg.scripts?.['build:app']).toContain('vite build')
+    expect(pkg.scripts?.build).toContain('build:lib')
+    expect(pkg.scripts?.build).toContain('build:app')
   })
 
   it('does not list Tailwind as a required consumer dependency', () => {
@@ -75,12 +94,29 @@ describe('package exports and consumer contract', () => {
     expect(pkg.devDependencies?.tailwindcss).toBeTruthy()
   })
 
+  it('does not require Radix or class helpers from consumers', () => {
+    expect(pkg.dependencies?.['@radix-ui/react-select']).toBeUndefined()
+    expect(pkg.dependencies?.['@radix-ui/react-slot']).toBeUndefined()
+    expect(pkg.dependencies?.['class-variance-authority']).toBeUndefined()
+    expect(pkg.dependencies?.clsx).toBeUndefined()
+    expect(pkg.dependencies?.['tailwind-merge']).toBeUndefined()
+  })
+
   it('does not expose private helpers as public exports', () => {
     const keys = Object.keys(pkg.exports)
     expect(keys).not.toContain('./ui/lib/utils')
     expect(keys).not.toContain('./cn')
     expect(keys.some((k) => k.includes('tailwind'))).toBe(false)
     expect(keys.some((k) => k.includes('radix'))).toBe(false)
+  })
+
+  it('points the web deploy at Brand Studio, not the library dist', () => {
+    const vercel = JSON.parse(readFileSync(join(root, 'vercel.json'), 'utf8')) as {
+      buildCommand?: string
+      outputDirectory?: string
+    }
+    expect(vercel.buildCommand).toBe('npm run build:app')
+    expect(vercel.outputDirectory).toBe('studio-dist')
   })
 })
 

@@ -2,7 +2,19 @@
   "name": "@maguer/market-data-brand",
   "private": false,
   "version": "0.2.0",
+  "description": "Design system for Market Data: tokens, wording, logo, UI kit, and Brand Studio.",
   "type": "module",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tinchoaguer/market-data-brand.git"
+  },
   "exports": {
     "./tokens.css": "./src/css/tokens.css",
     "./tokens": "./src/tokens/index.ts",
@@ -44,8 +56,9 @@
   },
   "scripts": {
     "dev": "npm run ui:generate && vite",
-    "build": "npm run build:lib && tsc --noEmit && vite build",
+    "build": "npm run build:lib && npm run build:app",
     "build:lib": "npm run ui:generate && vite build --config vite.ui.config.ts",
+    "build:app": "npm run tokens:generate && tsc --noEmit && vite build",
     "prepublishOnly": "npm run build:lib",
     "preview": "vite preview",
     "tokens:generate": "tsx scripts/generate-tokens-css.ts",
@@ -55,16 +68,9 @@
     "test": "vitest run",
     "test:watch": "vitest"
   },
-  "dependencies": {
+  "devDependencies": {
     "@radix-ui/react-select": "^2.3.3",
     "@radix-ui/react-slot": "^1.3.0",
-    "class-variance-authority": "^0.7.1",
-    "clsx": "^2.1.1",
-    "react": "^19.2.7",
-    "react-dom": "^19.2.7",
-    "tailwind-merge": "^3.6.0"
-  },
-  "devDependencies": {
     "@tailwindcss/cli": "^4.3.2",
     "@tailwindcss/vite": "^4.3.2",
     "@testing-library/jest-dom": "^6.9.1",
@@ -74,7 +80,12 @@
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.2",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
     "jsdom": "^29.1.1",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "tailwind-merge": "^3.6.0",
     "tailwindcss": "^4.3.2",
     "tsx": "^4.20.3",
     "typescript": "~6.0.2",

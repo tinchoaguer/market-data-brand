@@ -14,7 +14,7 @@ Spec Writer and Implementer **must** read `knowledge/writing/` before writing sp
 
 Rules:
 
-- Shared design-system strings live in `src/locales/en.json` and are exported via `@market-data/brand/wording`
+- Shared design-system strings live in `src/locales/en.json` and are exported via `@maguer/market-data-brand/wording`
 - Do not hardcode user-facing English in components
 - Keep `knowledge/writing/ui-copy.md` inventory in sync with `src/locales/en.json`
 - Feature-specific copy belongs in the consuming product app, not in this package
@@ -46,7 +46,7 @@ Rules:
 
 ## Brand Studio
 
-- Studio and labs under `src/brand/` are for local preview; they are not the public product UI
+- Studio and labs under `src/brand/` are the preview web app; they are not the public product UI and are not published to npm
 - Prefer reusing the same exported components in Studio that consumers will import
 - Do not maintain a full Symbol Reading (or other product screen) demo in Studio — product layout iteration belongs in the consuming app; Studio previews kit primitives only
 - Design → implementation loop (markdown SoT, Brand vs FE split, no paid Figma): [`visual-definitions/design-to-implementation.md`](./visual-definitions/design-to-implementation.md)

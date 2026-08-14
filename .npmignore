@@ -4,3 +4,7 @@
 **/*.spec.ts
 **/*.spec.tsx
 studio-dist/
+.github/
+specs/
+work/
+

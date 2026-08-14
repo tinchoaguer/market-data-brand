@@ -2,7 +2,13 @@
 
 ## System overview
 
-`market-data-brand` is the **design system** package for the market-data project. It is the source of truth for visual identity, shared copy, and shared UI primitives consumed as `@market-data/brand`.
+`market-data-brand` is the **design system** package for the market-data project. It is the source of truth for visual identity, shared copy, and shared UI primitives consumed as `@maguer/market-data-brand`.
+
+It has two deliverables from one repo:
+
+- **npm library** — public `exports` in `package.json`; UI kit compiled to `dist/`; published as `@maguer/market-data-brand`
+- **Brand Studio web app** — Vite SPA in `src/main.tsx` / `src/brand/`; production output in `studio-dist/` (never published to npm)
+
 
 ```
 market-data-brand/
@@ -29,27 +35,27 @@ market-data-brand/
 | **Writing guidelines** | Agent-facing tone, terminology, and DS inventory under `knowledge/writing/` |
 | **Visual definitions** | UX Regions / composition / layout SoT under `knowledge/visual-definitions/`; adopting apps receive snapshots via product UX Feature Writer (`knowledge/ux/*-contract.md`), not by reading this repo from the harness |
 | **Logo** | Configurable logo components and favicon export |
-| **Brand Studio** | Local Vite app to preview tokens, logo, wording, UI kit |
+| **Brand Studio** | Vite app to preview tokens, logo, wording, UI kit (local `npm run dev` or static deploy) |
 | **UI kit** | React primitives (controls + layout) + generated stylesheet for product apps |
 
-Consumers depend on this package via a local path or a published version. Product screens and API integration live in consuming applications, not here.
+Consumers depend on this package via a published version (`@maguer/market-data-brand`). Product screens and API integration live in consuming applications, not here.
 
 ## Current public surface
 
 | Export | Path | Purpose |
 |--------|------|---------|
-| `@market-data/brand/tokens.css` | `src/css/tokens.css` | CSS custom properties |
-| `@market-data/brand/tokens` | `src/tokens/index.ts` | TS token objects |
-| `@market-data/brand/wording` | `src/tokens/wording.ts` | Typed copy from default locale |
-| `@market-data/brand/locales/en` | `src/locales/en.json` | Default locale catalog |
-| `@market-data/brand/logo` | `src/brand/components/Logo.tsx` | Logo component |
-| `@market-data/brand/ui` | `dist/ui.js` | Shared React primitives |
-| `@market-data/brand/ui.css` | `src/css/ui.css` | Generated UI stylesheet |
+| `@maguer/market-data-brand/tokens.css` | `src/css/tokens.css` | CSS custom properties |
+| `@maguer/market-data-brand/tokens` | `src/tokens/index.ts` | TS token objects |
+| `@maguer/market-data-brand/wording` | `src/tokens/wording.ts` | Typed copy from default locale |
+| `@maguer/market-data-brand/locales/en` | `src/locales/en.json` | Default locale catalog |
+| `@maguer/market-data-brand/logo` | `src/brand/components/Logo.tsx` | Logo component |
+| `@maguer/market-data-brand/ui` | `dist/ui.js` | Shared React primitives |
+| `@maguer/market-data-brand/ui.css` | `src/css/ui.css` | Generated UI stylesheet |
 
 ## Wording ownership
 
 - **Runtime strings:** `src/locales/<locale>.json` (default `en`)
-- **Consumer API:** `@market-data/brand/wording` loads the default locale
+- **Consumer API:** `@maguer/market-data-brand/wording` loads the default locale
 - **Guidelines:** `knowledge/writing/` (must be read at Specification and Implementation)
 - Shared DS copy only; screen-specific copy stays in the consuming app
 
@@ -69,7 +75,7 @@ When implementing features in this repo, modify only:
 - `src/`
 - `scripts/`
 - `package.json` (exports, scripts, dependencies)
-- Build / Vite / TypeScript config at repo root
+- Build / Vite / TypeScript / Vercel config at repo root
 - `public/` (e.g. favicon)
 - `knowledge/`, `work/`, `specs/` as required by harness stages
 
@@ -87,6 +93,7 @@ Link related slugs in feature descriptions when a consumer feature depends on a 
 ## Technology
 
 - React 19 + TypeScript + Vite
-- Node/npm package `@market-data/brand`
+- Node/npm package `@maguer/market-data-brand`
 - Token pipeline: TypeScript → `scripts/generate-tokens-css.ts` → `src/css/tokens.css`
-- Wording pipeline: `src/locales/en.json` → `src/tokens/wording.ts` → `@market-data/brand/wording`
+- Wording pipeline: `src/locales/en.json` → `src/tokens/wording.ts` → `@maguer/market-data-brand/wording`
+- Dual build: `npm run build:lib` → `dist/` (npm); `npm run build:app` → `studio-dist/` (web)
